@@ -23,7 +23,7 @@ $LOCAL_REPO         = "{$LOCAL_ROOT}/{$LOCAL_REPO_NAME}";
 $REMOTE_REPO        = "git@github.com:UBC-CS310-2014w1/Kuklos.git";
 $BRANCH             = "master";
 
-if ( $_POST['payload'] ) {
+if ( $HTTP_RAW_POST_DATA ) {
   // Only respond to POST requests from Github
   
   if( file_exists($LOCAL_REPO) ) {
