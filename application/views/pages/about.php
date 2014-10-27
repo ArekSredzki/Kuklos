@@ -1,0 +1,1 @@
+Bicycle designed by <a href="http://www.thenounproject.com/olivierguin">Olivier Guin</a> from the <a href="http://www.thenounproject.com">Noun Project</a>

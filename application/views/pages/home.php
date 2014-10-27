@@ -4,6 +4,7 @@
                 <li class="slide slide-1"></li>
                 <li class="slide slide-2"></li>
                 <li class="slide slide-3"></li>
+	            <li class="slide slide-4"></li>
             </ul>
         </div>
     </div><!--//bg-slider-wrapper-->        
@@ -12,8 +13,7 @@
         <div class="container text-center">                
             <h2 class="title">Never get stuck without a place to put your bike again!</h2>
             <p class="intro">Kuklos is a mobile-friendly bike rack directory here to help you <br /> make the most out of Vancouver's bike-friendly atmosphere</p>
-            <p><a class="btn btn-cta btn-cta-primary" href="signup.html">Sign up for free</a></p>   
-            <button type="button" class="play-trigger btn-link " data-toggle="modal" data-target="#modal-video" data-backdrop="static" data-keyboard="false"><i class="fa fa-youtube-play"></i> Watch the video</button>
+            <p><a class="btn btn-cta btn-cta-primary" href="<php echo base_url('user/signup'); ?>">Sign up for free</a></p>
         </div><!--//container-->
     </section><!--//promo-->
     
@@ -23,7 +23,7 @@
         <section id="why" class="section why">
             <div class="container">
                 <h2 class="title text-center">How Can Kuklos Help You?</h2>
-                <p class="intro text-center">We take care of the UX and front-end design so you can save time building your site</p>
+                <p class="intro text-center">Quickly find bike racks near you whether you're at your desk or on mobiile</p>
                 <div class="row item">
                     <div class="content col-md-4 col-sm-12 col-xs-12">
                         <h3 class="title">Save you time and effort</h3>
@@ -35,11 +35,7 @@
                             <div class="quote-profile">
                                 <img class="img-responsive img-circle" src="assets/images/people/profile-s-1.png" alt="" />
                             </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p><a href="https://twitter.com/3rdwave_themes" target="_blank">@Kuklos</a> Love it! Thank you for making my life easier and saving me time! I’ll definitely recommend it to my friends. :)</p></blockquote>
-                                <p class="source">@LisaW, Bristol</p>
-                            </div><!--//quote-content-->                                     
-                        </div><!--//quote-->                        
+                        </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
                         <img class="img-responsive" src="assets/images/figures/figure-1.png" alt="" />
@@ -63,8 +59,8 @@
                             <div class="quote-content">
                                 <blockquote><p>I find the mobile app very useful when I'm on the go. Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p></blockquote>
                                 <p class="source">@JackT, San Francisco</p>
-                            </div><!--//quote-content-->         
-                        </div><!--//quote-->                        
+                            </div><!--//quote-content-->
+                        </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-pull-4 col-sm-pull-0 col-xs-pull-0">
                         <img class="img-responsive" src="assets/images/figures/figure-2.png" alt="" />
@@ -88,8 +84,8 @@
                             <div class="quote-content">
                                 <blockquote><p>Nice template! It’s practical and there is no gimmicks. Very easy to customise as well!</p></blockquote>
                                 <p class="source"><a href="index.html#">@AlexD</a>, London</p>
-                            </div><!--//quote-content-->          
-                        </div><!--//quote-->                        
+                            </div><!--//quote-content-->
+                        </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
                         <img class="img-responsive" src="assets/images/figures/figure-3.png" alt="" />
@@ -149,8 +145,8 @@
                                 <p>We used Kuklos as a front-end design template for our product site. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum elit tortor, consectetur vitae varius at, interdum eget libero. Morbi.</p>
                                 </blockquote>
                                 <p class="source">Kevin Knight<br /><span class="title">Co-Founder, Startup Hub</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->                        
+                            </div><!--//content-->
+                        </div><!--//item-->
                         <div class="item">
                             <figure class="profile"><img src="assets/images/people/profile-m-2.png" alt="" /></figure>
                             <div class="content">

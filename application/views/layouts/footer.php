@@ -1,4 +1,3 @@
-
     <!-- ******FOOTER****** --> 
     <footer class="footer">
         <div class="footer-content">
@@ -48,7 +47,7 @@
                                 <li class="row-end"><a href="index.html#"><i class="fa fa-rss"></i></a></li>             
                             </ul>
                             <div class="form-container">
-                                <p class="intro">Stay up to date with the latest news and offers from Velocity</p>
+                                <p class="intro">Stay up to date with the latest news and offers from Kuklos</p>
                                 <form class="signup-form navbar-form">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Enter your email address">
@@ -94,7 +93,7 @@
         </div><!--//footer-content-->
         <div class="bottom-bar">
             <div class="container">
-                <small class="copyright">Copyright @ 2014 <a href="../index.html" target="_blank">3rd Wave Media</a></small>                
+                <small class="copyright">Copyright @ 2014 <a href="../index.html" target="_blank">Kuklos</a></small>                
             </div><!--//container-->
         </div><!--//bottom-bar-->
     </footer><!--//footer-->
@@ -126,7 +125,3 @@
     <script type="text/javascript" src="assets/plugins/FitVids/jquery.fitvids.js"></script>
     <script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>     
     <script type="text/javascript" src="assets/js/main.js"></script>
-    
-            
-</body>
-</html>

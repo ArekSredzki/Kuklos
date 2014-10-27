@@ -2,10 +2,17 @@
 
 class Home extends CI_Controller {
 
+	function __construct()
+	{
+		parent::__construct();
+		$this->template->set_partial('header', 'layouts/header')->set_partial('footer', 'layouts/footer')
+	}
+
 	public function index() {
-		$this->load->view('layouts/header');
-		$this->load->view('pages/home');
-		$this->load->view('layouts/footer');
+		$data['page_name'] = "home-page"
+		$this->template
+			->title('Kuklos', 'Vancouver\'s #1 Bike Rack Directory')
+			->build('pages/home', $data);
 	}
 }
 

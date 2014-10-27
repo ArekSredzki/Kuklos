@@ -18,14 +18,14 @@ class User_Model extends CI_Model {
 		$this->load->helper('time');
 
 		// Populate user table
-		$data1 = array(
-			'username' => $this->input->post('username'),
+		$data = array(
+			'email' => $this->input->post('email'),
 			'password' => $this->hash_password($this->input->post('password')),
 			'timestamp' => now()
 		);
 		
-		$query = $this->db->insert('users', $data1);
-		//$username = $this->input->post('username');
+		$query = $this->db->insert('users', $data);
+		//$email = $this->input->post('email');
 
 
 		// Report findings
@@ -41,34 +41,25 @@ class User_Model extends CI_Model {
 	 //                             //
 	//*****************************//
 
-	function edit_user($user_id) {
-		// Update user_info table with new info
+	function edit_user($email) {
+		// Update users table with new info
 		$data = array(
-			'name' => $this->input->post('name')
+			'username' => $this->input->post('username')
 		);
 
-		$this->db->where('user_id', $user_id);
-		if ($this->db->update('user_info', $data)) {
-			// Update users table with new info
-			$data = array(
-				'email' => $this->input->post('email')
-			);
-
-			$this->db->where('user_id', $user_id);
-			if ($this->db->update('users', $data)) {
-				return true;
-			}
+		$this->db->where('email', $email);
+		if ($this->db->update('users', $data)) {
+			return true;
 		}
 	}
 
-	function reset_password($user_id,$newpassword) {
-
+	function reset_password($email, $new_password) {
 		// Update database with new info
 		$data = array(
-			'password' => $this->hash_password($newpassword)
+			'password' => $this->hash_password($new_password)
 		);
 
-		$this->db->where('user_id', $user_id);
+		$this->db->where('email', $email);
 		if ($this->db->update('users', $data)) {
 			return true;
 		}
@@ -86,26 +77,26 @@ class User_Model extends CI_Model {
 	///////////////////////
 
 
-	// Get all users in order by user_id
+	// Get all users in order by creation timestamp
 	function get_users($limit = -1) {
 
 		// Get all users by order
 		if ($limit == -1){
-			$user_query = mysql_query("SELECT user_id
+			$user_query = mysql_query("SELECT email
 				FROM users
-				ORDER BY user_id DESC");
+				ORDER BY timestamp ASC");
 		} else {
-			$user_query = mysql_query("SELECT user_id
+			$user_query = mysql_query("SELECT email
 				FROM users
-				ORDER BY user_id DESC
+				ORDER BY timestamp ASC
 				LIMIT 0, $limit");
 		}
 		
 		// Init array
 		$users = array();
-		// Add each image & it's info to images array
+		// Add each user & it's info to users array
 		while ($user = mysql_fetch_assoc($user_query)) {
-			$users[] = $this->get_userdata($user['user_id']);
+			$users[] = $this->get_userdata($user['email']);
 		}
 		return $users;
 	}
@@ -114,17 +105,18 @@ class User_Model extends CI_Model {
 	 // USER FUNCTIONS //
 	////////////////////
 
-	public function get_userdata($user_id = '0') {
-		if ($user_id == '0')
-			$user_id = $this->session->userdata('user_id');
+	public function get_userdata($email = '0') {
+		if ($email == '0')
+			$email = $this->session->userdata('email');
 		
 
-		$this->db->where('user_id', $user_id);
+		$this->db->where('email', $email);
 		$userrow = $this->db->get('users');
 
 		if ($userrow) {
 			$row = $userrow->row();
 			$data = array(
+				'email' => $row->email,
 				'username' => $row->username
 			);
 
@@ -132,8 +124,24 @@ class User_Model extends CI_Model {
 		}
 	}
 
+	// returns email if valid username otherwise just returns input
+	public function get_username($email) {
+		if ($this->user_check($email)) {
+			return $email;
+		} else {
+			$this->db->where('username', $email);
+			$userrow = $this->db->get('users');
+
+			if ($userrow) {
+				$row = $userrow->row();
+
+				return $row->email;
+			} else return $email;
+		}
+	}
+
     public function hash_password($password) {
-        $site_key = 'ea26b464795010fa1d3a19f2d7febec29a4625e3';
+        $site_key = 'ea26b464795010va1d3a19f2d7fdbec29a4625e3';
         return hash_hmac('sha1', $password . '293296', $site_key);
     }
 
@@ -144,8 +152,8 @@ class User_Model extends CI_Model {
 	//*****************************//
 
 	// Check if valid user
-	function user_check($username) {
-		$this->db->where('username', $username)->from('users');
+	function user_check($email) {
+		$this->db->where('email', $email)->from('users');
 		if ($this->db->count_all_results() == 1)
 			return true;
 		else
@@ -155,7 +163,7 @@ class User_Model extends CI_Model {
 	// Check if user is logged in
     function loggedin() {
         if($this->session->userdata('is_logged_in')) {
-        	if ($this->user_check($this->session->userdata('username')))
+        	if ($this->user_check($this->session->userdata('email')))
             	return true;
             else {
 				$this->session->sess_destroy();
@@ -165,19 +173,19 @@ class User_Model extends CI_Model {
             return false;
     }
 
-    /// THIS HAS TO BE CHANGED FOR FB LOGIN
-	public function can_login($username = '') {
-		if ($username == '') {
-			$username = $this->input->post('username');
-		}
-		$this->db->where('username', $username);
+    // Check if user has entered valid credentials
+	public function can_login($email = '') {
+		if ($email == '')
+			$email = $this->input->post('email');
+		
+		$this->db->where('email', $email);
 		$this->db->where('password', $this->hash_password($this->input->post('password')));
 		$query = $this->db->get('users');
 
 		if ($query->num_rows() == 1) {
 			return true;
 		} else {
-			$this->db->where('email', $this->input->post('username'));
+			$this->db->where('username', $this->input->post('username'));
 			$this->db->where('password', $this->hash_password($this->input->post('password')));
 			$query = $this->db->get('users');
 
