@@ -28,12 +28,12 @@ echo "Updating to HEAD";
 if( file_exists($LOCAL_REPO) ) {
 
 	// If there is already a repo, just run a git pull to grab the latest changes
-	$output = shell_exec("cd {$LOCAL_REPO} && git pull");
+	$output = shell_exec("cd {$LOCAL_REPO} && git pull 2>&1");
 
 } else {
 
 	// If the repo does not exist, then clone it into the parent directory
-	$output = shell_exec("cd {$LOCAL_ROOT} && git clone {$REMOTE_REPO}");
+	$output = shell_exec("cd {$LOCAL_ROOT} && git clone {$REMOTE_REPO} 2>&1");
 
 }
 
