@@ -1,15 +1,29 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * CodeIgniter Dwoo Parser Class
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP 4.3.2 or newer
+ *
+ * @package		CodeIgniter
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008, EllisLab, Inc.
+ * @license		http://codeigniter.com/user_guide/license.html
+ * @link		http://codeigniter.com
+ * @since		Version 1.0
+ * @filesource
+ */
+// ------------------------------------------------------------------------
+
+/**
+ * Parser Class
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Parser
- * @license     http://philsturgeon.co.uk/code/dbad-license
+ * @author		Phil Sturgeon
  * @link		http://philsturgeon.co.uk/code/codeigniter-dwoo
  */
-
-include(APPPATH.'libraries/dwoo/dwooAutoload.php');
+include(APPPATH . 'libraries/dwoo/dwooAutoload.php');
 
 class MY_Parser extends CI_Parser {
 
@@ -24,7 +38,7 @@ class MY_Parser extends CI_Parser {
 
 	function __construct($config = array())
 	{
-		if ( ! empty($config))
+		if (!empty($config))
 		{
 			$this->initialize($config);
 		}
@@ -49,8 +63,6 @@ class MY_Parser extends CI_Parser {
 			$this->{'_' . $key} = $val;
 		}
 	}
-
-	// --------------------------------------------------------------------
 
 	function spawn()
 	{
@@ -138,27 +150,18 @@ class MY_Parser extends CI_Parser {
 		$this->_ci->benchmark->mark('dwoo_parse_start');
 
 		// Convert from object to array
-		if ( ! is_array($data))
+		if (!is_array($data))
 		{
 			$data = (array) $data;
 		}
 
-		$data = array_merge($data, $this->_ci->load->get_vars());
+		$data = array_merge($data, $this->_ci->load->_ci_cached_vars);
 
 		foreach ($this->_parser_assign_refs as $ref)
 		{
 			$data[$ref] = & $this->_ci->{$ref};
 		}
 
-		// --------------------------------------------------------------------
-		// Convert elapsed time and memory usage for dwoo compatibility
-
-		if (CI_VERSION < 2)
-		{
-			$string = str_replace(array('{elapsed_time}', '{memory_usage}'), array('[elapsed_time]', '[memory_usage]'), $string);
-		}
-
-		// --------------------------------------------------------------------
 		// Object containing data
 		$dwoo_data = new Dwoo_Data;
 		$dwoo_data->setData($data);
@@ -173,29 +176,17 @@ class MY_Parser extends CI_Parser {
 			// render the template
 			$parsed_string = $dwoo->get($tpl, $dwoo_data);
 		}
+
 		catch (Exception $e)
 		{
 			show_error($e);
-		}
-
-		// --------------------------------------------------------------------
-		// Parse out the elapsed time and memory usage,
-		// then swap the pseudo-variables with the data
-
-		$elapsed = $this->_ci->benchmark->elapsed_time('total_execution_time_start', 'total_execution_time_end');
-
-		if (CI_VERSION < 2)
-		{
-			$memory = ( ! function_exists('memory_get_usage')) ? '0' : round(memory_get_usage() / 1024 / 1024, 2) . 'MB';
-
-			$string = str_replace(array('[elapsed_time]', '[memory_usage]'), array($elapsed, $memory), $string);
 		}
 
 		// Finish benchmark
 		$this->_ci->benchmark->mark('dwoo_parse_end');
 
 		// Return results or not ?
-		if ( ! $return)
+		if (!$return)
 		{
 			$this->_ci->output->append_output($parsed_string);
 			return;
@@ -207,20 +198,19 @@ class MY_Parser extends CI_Parser {
 	// --------------------------------------------------------------------
 }
 
-/**
-*class MY_Security_Policy extends Dwoo_Security_Policy {
-*
-*	public function callMethod(Dwoo_Core $dwoo, $obj, $method, $args)
-*	{
-*		return call_user_func_array(array($obj, $method), $args);
-*	}
-*
-*	public function isMethodAllowed()
-*	{
-*		return TRUE;
-*	}
-*}
-**/
+class MY_Security_Policy extends Dwoo_Security_Policy {
+
+	public function callMethod(Dwoo_Core $dwoo, $obj, $method, $args)
+	{
+		return call_user_func_array(array($obj, $method), $args);
+	}
+
+	public function isMethodAllowed()
+	{
+		return TRUE;
+	}
+
+}
 
 // END MY_Parser Class
 
