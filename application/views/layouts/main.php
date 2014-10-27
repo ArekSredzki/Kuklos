@@ -4,7 +4,7 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head> 
 
-    <?php echo $template['partial']['header']; ?>
+    <?php echo $template['partials']['header']; ?>
 
 </head>
 <body class="<?php echo $page_name; ?>"> 
@@ -50,7 +50,7 @@
 
     <?php echo $template['body'] ?>
 
-    <?php echo $template['partial']['footer']; ?>  
+    <?php echo $template['partials']['footer']; ?>  
 
 </body>
 </html>
