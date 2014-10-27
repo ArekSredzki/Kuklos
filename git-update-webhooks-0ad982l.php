@@ -18,11 +18,12 @@
 
 // Set Variables
 $LOCAL_ROOT         = "/usr/share/nginx/html";
-$LOCAL_REPO_NAME    = "kuklos";
+$LOCAL_REPO_NAME    = "Kuklos";
 $LOCAL_REPO         = "{$LOCAL_ROOT}/{$LOCAL_REPO_NAME}";
 $REMOTE_REPO        = "git@github.com:UBC-CS310-2014w1/Kuklos.git";
 $BRANCH             = "master";
 
+echo "Hello";
 if ( $HTTP_RAW_POST_DATA ) {
   // Only respond to POST requests from Github
   
