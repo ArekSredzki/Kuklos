@@ -26,7 +26,7 @@ class User extends CI_Controller {
 
 		if ($this->form_validation->run() == False) {
 			
-		$data['page_name'] = "signup-page"
+		$data['page_name'] = "signup-page";
 			$this->template
 				->title('Signup', 'Kuklos')
 				->set_layout('minimal')
@@ -81,7 +81,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required|trim');
 
 		if ($this->form_validation->run() == false) {
-			$data['page_name'] = "login-page"
+			$data['page_name'] = "login-page";
 			$this->template
 				->title('Login', 'Kuklos')
 				->set_layout('minimal')
@@ -113,7 +113,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|valid_email|callback_valid_account_email');
 
 		if($this->form_validation->run() === FALSE) {
-			$data['page_name'] = "forgot-page"
+			$data['page_name'] = "forgot-page";
 			$this->template
 				->title('Password Reset', 'Kuklos')
 				->set_layout('minimal')
@@ -153,7 +153,7 @@ class User extends CI_Controller {
 			} else
 				$data['result'] =  '<div class="alert alert-danger fade in"><strong>Error</strong><button type="button" class="close" data-dismiss="alert">&times;</button><br>Unable to reset password.</div>';
 
-			$data['page_name'] = "forgot-page"
+			$data['page_name'] = "forgot-page";
 			$this->template
 				->title('Password Reset', 'Kuklos')
 				->set_layout('minimal')
