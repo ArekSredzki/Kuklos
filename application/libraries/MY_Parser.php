@@ -9,6 +9,7 @@
  * @link		http://philsturgeon.co.uk/code/codeigniter-dwoo
  */
 
+include(APPPATH.'libraries/dwoo/dwooAutoload.php');
 
 class MY_Parser extends CI_Parser {
 
