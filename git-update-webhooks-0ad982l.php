@@ -23,23 +23,22 @@ $LOCAL_REPO         = "{$LOCAL_ROOT}/{$LOCAL_REPO_NAME}";
 $REMOTE_REPO        = "git@github.com:UBC-CS310-2014w1/Kuklos.git";
 $BRANCH             = "master";
 
-echo "Hello";
-if ( $HTTP_RAW_POST_DATA ) {
-  // Only respond to POST requests from Github
+echo "Updating to HEAD";
   
-  if( file_exists($LOCAL_REPO) ) {
-    
-    // If there is already a repo, just run a git pull to grab the latest changes
-    shell_exec("cd {$LOCAL_REPO} && git pull");
+if( file_exists($LOCAL_REPO) ) {
 
-    die("done " . mktime());
-  } else {
-    
-    // If the repo does not exist, then clone it into the parent directory
-    shell_exec("cd {$LOCAL_ROOT} && git clone {$REMOTE_REPO}");
-    
-    die("done " . mktime());
-  }
+	// If there is already a repo, just run a git pull to grab the latest changes
+	$output = shell_exec("cd {$LOCAL_REPO} && git pull");
+
+} else {
+
+	// If the repo does not exist, then clone it into the parent directory
+	$output = shell_exec("cd {$LOCAL_ROOT} && git clone {$REMOTE_REPO}");
+
 }
+
+echo "<pre>$output</pre>";
+
+die("done " . mktime());
 
 ?>
