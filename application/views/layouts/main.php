@@ -4,15 +4,15 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head> 
 
-    {$template.partial.header}
+    <?php echo $template['partial']['header']; ?>
 
 </head>
-<body class="{$page_name}"> 
+<body class="<?php echo $page_name; ?>"> 
     <!-- ******HEADER****** --> 
     <header id="header" class="header">  
-        <div class="container">       
+        <div class="container">
             <h1 class="logo">
-                <a href="index.html"><span class="text">Kuklos</span></a>
+                <a href="<?php echo base_url(); ?>"><span class="text">Kuklos</span></a>
             </h1><!--//logo-->
             <nav class="main-nav navbar-right" role="navigation">
                 <div class="navbar-header">
@@ -25,7 +25,7 @@
                 </div><!--//navbar-header-->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active nav-item"><a href="index.html">Home</a></li>
+                        <li class="active nav-item"><a href="<?php echo base_url(); ?>">Home</a></li>
                         <li class="nav-item"><a href="features.html">Features</a></li>
                         <li class="nav-item"><a href="pricing.html">Pricing</a></li>
                         <li class="nav-item dropdown">
@@ -38,19 +38,19 @@
                                 <li><a href="blog-archive.html">Blog Archive</a></li>
                                 <li><a href="about.html">About Us</a></li>
                                 <li><a href="contact.html">Contact</a></li>                    
-                            </ul>                            
+                            </ul>
                         </li><!--//dropdown-->                         
-                        <li class="nav-item"><a href="<?php echo base_url('login'); ?>">Log in</a></li>
-                        <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo base_url('register'); ?>">Sign Up Free</a></li>
+                        <li class="nav-item"><a href="<?php echo base_url('user/login'); ?>">Log in</a></li>
+                        <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo base_url('user/signup'); ?>">Sign Up Free</a></li>
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
             </nav><!--//main-nav-->                     
         </div><!--//container-->
     </header><!--//header-->
 
-    {$template.body}
+    <?php echo $template['body'] ?>
 
-    {$template.partial.footer}
+    <?php echo $template['partial']['footer']; ?>  
 
 </body>
 </html>
