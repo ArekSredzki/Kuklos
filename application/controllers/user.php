@@ -6,7 +6,7 @@ class User extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('user_model');
-		$this->template->set_partial('header', 'layouts/header')->set_partial('footer', 'layouts/footer')
+		$this->template->set_partial('header', 'layouts/header')->set_partial('footer', 'layouts/footer');
 	}
 
 	public function index() {

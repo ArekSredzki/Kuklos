@@ -5,7 +5,7 @@ class Home extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->template->set_partial('header', 'layouts/header')->set_partial('footer', 'layouts/footer')
+		$this->template->set_partial('header', 'layouts/header')->set_partial('footer', 'layouts/footer');
 	}
 
 	public function index() {
