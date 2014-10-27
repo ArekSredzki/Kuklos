@@ -173,41 +173,13 @@
             </div><!--//container-->
         </section><!--//testimonials-->          
         
-        <!-- ******Press Section****** -->
-        <section class="section press">
-            <div class="container text-center">
-                <h2 class="title">Press Coverage</h2>
-                <ul class="press-list list-inline row">
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-1.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-2.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4 xs-break"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-3.png" alt="" /></a></li>                   
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-4.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-5.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-6.png" alt="" /></a></li>                    
-                </ul><!--//press-list-->
-                <ul class="press-list list-inline row last">
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-7.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-8.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4 xs-break"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-9.png" alt="" /></a></li>                   
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-10.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-11.png" alt="" /></a></li>
-                    <li class="col-md-2 col-sm-2 col-xs-4"><a href="index.html#"><img class="img-responsive" src="assets/images/press/press-12.png" alt="" /></a></li>                    
-                </ul><!--//press-list-->
-                
-                <div class="press-lead text-center">
-                     <h3 class="title">Have press inquires?</h3>
-                     <p class="press-links"><a href="index.html#">Download our press kit</a> or <a href="contact.html">Get in touch</a></p>
-                </div>
-               
-            </div><!--//container-->
-        </section><!--//press-->
         
         <!-- ******CTA Section****** -->
         <section id="cta-section" class="section cta-section text-center home-cta-section">
             <div class="container">
-               <h2 class="title">Ready to promote your product online?</h2>
-               <p class="intro">More than <span class="counting">300,000</span> users are using Kuklos</p>
-               <p><a class="btn btn-cta btn-cta-primary" href="../website-templates/responsive-bootstrap-theme-for-products-velocity/index.html" target="_blank">Get Kuklos Now</a></p>
+               <h2 class="title">Ready to evolve your biking experience?</h2>
+               <p class="intro">More than <span class="counting">0</span> users are using Kuklos</p>
+               <p><a class="btn btn-cta btn-cta-primary" href="<?php echo base_url('user/signup'); ?>" target="_blank">Signup in under than 15 seconds</a></p>
             </div><!--//container-->
         </section><!--//cta-section-->
         

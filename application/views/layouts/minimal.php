@@ -4,7 +4,7 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head> 
 
-    <?php echo $template['partial']['header']; ?>
+    <?php echo $template['partials']['header']; ?>
 
 </head>
 <body class="<?php echo $page_name; ?> access-page has-full-screen-bg"> 
@@ -23,7 +23,7 @@
 
     </div><!--//upper-wrapper-->
     
-    <?php echo $template['partial']['footer']; ?>  
+    <?php echo $template['partials']['footer']; ?>  
 
 </body>
 </html>

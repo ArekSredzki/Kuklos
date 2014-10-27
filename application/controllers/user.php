@@ -5,7 +5,6 @@ class User extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->library('user_model');
 		$this->template->set_partial('header', 'layouts/header')->set_partial('footer', 'layouts/footer');
 	}
 
@@ -15,18 +14,18 @@ class User extends CI_Controller {
 
 	//		$this->form_validation->set_rules('username', 'Username', 'required|trim|min_length[4]|max_length[32]|is_unique[users.username]|xss_clean|strip_tags');
 
-	public function register() {
-		if ($this->user_model->loggedin())
+	public function signup() {
+		if ($this->user_model->is_logged_in())
 			redirect('account/login');
 
 		$this->load->library('form_validation','encrypt');
 
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger fade in">', '<button type="button" class="close" data-dismiss="alert">&times;</button></div>'); 
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[50]|xss_clean|strip_tags|valid_email|is_unique[users.email]');
 		$this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|max_length[30]');
 
 		if ($this->form_validation->run() == False) {
-			
-		$data['page_name'] = "signup-page";
+			$data['page_name'] = "signup-page";
 			$this->template
 				->title('Signup', 'Kuklos')
 				->set_layout('minimal')
@@ -40,7 +39,7 @@ class User extends CI_Controller {
 			$this->email->to($this->input->post('email'));
 			$this->email->subject("Welcome to Kuklos!");
 
-			$message = "<p>Hello!</p>"
+			$message = "<p>Hello!</p>";
 			$message .= "<p>Thanks for signing up for a Kuklos account!</p>";
 			$message .= "<p>Your username is: ".$this->input->post('email')."</p>";
 			$message .= "<p>You can login here: ".base_url('user/login')."</p>";
@@ -67,13 +66,10 @@ class User extends CI_Controller {
 		}
 	}
 
-	public function signup() {
-	}
-
 	public function login() {
 		$this->load->library('form_validation');
 
-		if ($this->user_model->loggedin())
+		if ($this->user_model->is_logged_in())
 			redirect('user');
 
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger fade in">', '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
@@ -81,7 +77,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required|trim');
 
 		if ($this->form_validation->run() == false) {
-			$data['page_name'] = "login-page";
+			$data['page_name'] = "signup-page";
 			$this->template
 				->title('Login', 'Kuklos')
 				->set_layout('minimal')
@@ -106,7 +102,7 @@ class User extends CI_Controller {
 	public function forgot() {
 		$this->load->library('form_validation');
 
-		if ($this->user_model->loggedin())
+		if ($this->user_model->is_logged_in())
 			redirect('user');
 
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger fade in">', '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');

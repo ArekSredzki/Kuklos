@@ -93,6 +93,9 @@ a.btn-ghost .text,
     position: relative;
     top: -2px;
 }
+.alert {
+    font-size: 13px;
+}
 .highlight {
     color: #96a94b;
 }

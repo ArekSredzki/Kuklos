@@ -39,9 +39,14 @@
                                 <li><a href="about.html">About Us</a></li>
                                 <li><a href="contact.html">Contact</a></li>                    
                             </ul>
-                        </li><!--//dropdown-->                         
+                        </li><!--//dropdown-->
+                    <?php if ($this->user_model->is_logged_in()) { ?>
+                        <li class="nav-item"><a href="<?php echo base_url('user/logout'); ?>">Logout</a></li>
+                        <?php if ($this->user_model->is_admin($this->session->userdata('email'))) echo '<li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="'.base_url('admin').'">Sign Up Free</a></li>;' ?>
+                    <?php } else { ?>
                         <li class="nav-item"><a href="<?php echo base_url('user/login'); ?>">Log in</a></li>
                         <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo base_url('user/signup'); ?>">Sign Up Free</a></li>
+                    <?php } ?>
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
             </nav><!--//main-nav-->                     

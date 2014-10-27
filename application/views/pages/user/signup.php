@@ -5,17 +5,18 @@
                     <div class="form-box col-md-8 col-sm-12 col-xs-12 col-md-offset-2 col-sm-offset-0 xs-offset-0">     
                         <div class="form-box-inner">
                             <h2 class="title text-center">Sign up now</h2>  
-                            <p class="intro text-center">It only takes 10 seconds!</p>               
+                            <p class="intro text-center">It takes under 15 seconds!</p>               
                             <div class="row">
                                 <div class="form-container col-md-5 col-sm-12 col-xs-12">
-                                    <form class="signup-form">                
+                                    <form class="signup-form" method="post" action="<?php echo current_url(); ?>">
+                                    	<?php echo validation_errors(); ?>
                                         <div class="form-group email">
                                             <label class="sr-only" for="signup-email">Your email</label>
-                                            <input id="signup-email" type="email" class="form-control login-email" placeholder="Your email">
+                                            <input id="signup-email" type="email" class="form-control login-email" placeholder="Your email" name="email">
                                         </div><!--//form-group-->
                                         <div class="form-group password">
                                             <label class="sr-only" for="signup-password">Your password</label>
-                                            <input id="signup-password" type="password" class="form-control login-password" placeholder="Password">
+                                            <input id="signup-password" type="password" class="form-control login-password" placeholder="Password" name="password">
                                         </div><!--//form-group-->
                                         <button type="submit" class="btn btn-block btn-cta-primary">Sign up</button>
                                         <p class="note">By signing up, you agree to our terms of services and privacy policy.</p>

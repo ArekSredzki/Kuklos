@@ -2,12 +2,12 @@
 
 class User_Model extends CI_Model {
 
-    function __construct() {
-        // Call the Model constructor
-        parent::__construct();
-    }
+	function __construct() {
+		// Call the Model constructor
+		parent::__construct();
+	}
 
-	    //*****************************//
+		//*****************************//
 	   //                             //
 	  //      CREATION FUNCTIONS     //
 	 //                             //
@@ -15,7 +15,7 @@ class User_Model extends CI_Model {
 
 
 	function add_user() {
-		$this->load->helper('time');
+		$this->load->helper('date');
 
 		// Populate user table
 		$data = array(
@@ -35,7 +35,7 @@ class User_Model extends CI_Model {
 			return false;
 	}
 
-	    //*****************************//
+		//*****************************//
 	   //                             //
 	  //      EDITING FUNCTIONS      //
 	 //                             //
@@ -66,13 +66,13 @@ class User_Model extends CI_Model {
 	}
 
 
-	    //*****************************//
+		//*****************************//
 	   //                             //
 	  //     RETRIEVAL FUNCTIONS     //
 	 //                             //
 	//*****************************//
 	
-      ///////////////////////
+	  ///////////////////////
 	 // GENERAL FUNCTIONS //
 	///////////////////////
 
@@ -101,7 +101,7 @@ class User_Model extends CI_Model {
 		return $users;
 	}
 
-      ////////////////////
+	  ////////////////////
 	 // USER FUNCTIONS //
 	////////////////////
 
@@ -125,27 +125,26 @@ class User_Model extends CI_Model {
 	}
 
 	// returns email if valid username otherwise just returns input
-	public function get_username($email) {
+	public function get_email($email) {
 		if ($this->user_check($email)) {
 			return $email;
 		} else {
 			$this->db->where('username', $email);
-			$userrow = $this->db->get('users');
+			$row = $this->db->get('users')->row();
 
-			if ($userrow) {
-				$row = $userrow->row();
-
+			if ($row)
 				return $row->email;
-			} else return $email;
+			else
+				return $email;
 		}
 	}
 
-    public function hash_password($password) {
-        $site_key = 'ea26b464795010va1d3a19f2d7fdbec29a4625e3';
-        return hash_hmac('sha1', $password . '293296', $site_key);
-    }
+	public function hash_password($password) {
+		$site_key = 'ea26b464795010va1d3a19f2d7fdbec29a4625e3';
+		return hash_hmac('sha1', $password . '293296', $site_key);
+	}
 
-	    //*****************************//
+		//*****************************//
 	   //                             //
 	  //       CHECK FUNCTIONS       //
 	 //                             //
@@ -161,19 +160,30 @@ class User_Model extends CI_Model {
 	}
 
 	// Check if user is logged in
-    function loggedin() {
-        if($this->session->userdata('is_logged_in')) {
-        	if ($this->user_check($this->session->userdata('email')))
-            	return true;
-            else {
+	function is_logged_in() {
+		if($this->session->userdata('is_logged_in')) {
+			if ($this->user_check($this->session->userdata('email')))
+				return true;
+			else {
 				$this->session->sess_destroy();
-            	return false;
-            }
-        } else
-            return false;
-    }
+				return false;
+			}
+		} else
+			return false;
+	}
 
-    // Check if user has entered valid credentials
+	// Check if user is admin
+	function is_admin($email) {
+		$this->db->where('email', $email);
+		$row = $this->db->get('users')-row();
+
+		if ($row)
+			return ($row->admin == 1);
+		else
+			return false;
+	}
+
+	// Check if user has entered valid credentials
 	public function can_login($email = '') {
 		if ($email == '')
 			$email = $this->input->post('email');
