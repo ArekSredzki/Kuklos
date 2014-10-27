@@ -111,10 +111,10 @@ class User_Model extends CI_Model {
 		
 
 		$this->db->where('email', $email);
-		$userrow = $this->db->get('users');
+		$query = $this->db->get('users');
 
-		if ($userrow) {
-			$row = $userrow->row();
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
 			$data = array(
 				'email' => $row->email,
 				'username' => $row->username
@@ -130,11 +130,12 @@ class User_Model extends CI_Model {
 			return $email;
 		} else {
 			$this->db->where('username', $email);
-			$row = $this->db->get('users')->row();
+			$query = $this->db->get('users');
 
-			if ($row)
+			if ($query->num_rows() > 0) {
+				$row = $query->row();
 				return $row->email;
-			else
+			} else
 				return $email;
 		}
 	}
@@ -175,11 +176,12 @@ class User_Model extends CI_Model {
 	// Check if user is admin
 	function is_admin($email) {
 		$this->db->where('email', $email);
-		$row = $this->db->get('users')-row();
+		$query = $this->db->get('users');
 
-		if ($row)
-			return ($row->admin == 1);
-		else
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			return ($row->is_admin == 1);
+		} else
 			return false;
 	}
 

@@ -1,2 +1,3 @@
 Bicycle designed by <a href="http://www.thenounproject.com/olivierguin">Olivier Guin</a> from the <a href="http://www.thenounproject.com">Noun Project</a>
 Bike Rack designed by <a href="http://www.thenounproject.com/aspirina">luis pachon</a> from the <a href="http://www.thenounproject.com">Noun Project</a>
+Map designed by <a href="http://www.thenounproject.com/paulstevens">Paul Stevens</a> from the <a href="http://www.thenounproject.com">Noun Project</a>

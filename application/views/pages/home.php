@@ -1,10 +1,10 @@
     <div class="bg-slider-wrapper">
         <div class="flexslider bg-slider">
             <ul class="slides">
-                <li class="slide slide-1"></li>
-                <li class="slide slide-2"></li>
+                <li class="slide slide-4"></li>
                 <li class="slide slide-3"></li>
-	            <li class="slide slide-4"></li>
+                <li class="slide slide-2"></li>
+	            <li class="slide slide-1"></li>
             </ul>
         </div>
     </div><!--//bg-slider-wrapper-->        
@@ -28,151 +28,30 @@
                     <div class="content col-md-4 col-sm-12 col-xs-12">
                         <h3 class="title">Save you time and effort</h3>
                         <div class="desc">
-                            <p>Explain one of your product benefits here. Let users know how they can benefit using your product. It’s also a good idea to back it up with a testimonial or tweet from your users.</p>
-                            <p>The original PSD of the graphic is included in the package. You can easily customise the PSD to meet your needs.</p>
+                            <p>Ensure that there's a place to lock up your bike where ever you're going.</p>
+                            <p>Route your trip to the bike rack nearest to your destination with Kuklos.</p>
                         </div>
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="assets/images/people/profile-s-1.png" alt="" />
-                            </div><!--//profile-->
-                        </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
-                        <img class="img-responsive" src="assets/images/figures/figure-1.png" alt="" />
-                        <figcaption class="figure-caption">(Screenshot: Coral - App &amp; website startup kit) </figcaption>
+                        <div>
+                            <img width="100px" class="img-responsive" src="<?php echo base_url('assets/images/noun_project/map.svg'); ?>" alt="" style="width: 200px;"/>
+                        </div>
                     </figure>
                 </div><!--//item-->
                 
                 <div class="row item">
                     <div class="content col-md-4 col-sm-12 col-xs-12 col-md-push-8 col-sm-push-0 col-xs-push-0">
-                        <h3 class="title">Works across all devices</h3>
+                        <h3 class="title">Know where to go</h3>
                         <div class="desc">
-                            <p>Explain one of your product benefits here. Let users know how they can benefit using your product. It’s also a good idea to back it up with a testimonial or tweet from your users.</p>
-                            <p>The original PSD of the graphic is included in the package. You can easily customise the PSD to meet your needs.</p>
-                            <p><i class="fa fa-download"></i> <a href="download.html">Download mobile versions</a></p>
+                            <p>View comments and ratings on any bike rack in Vancouver.</p>
                         </div>
-                        
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="assets/images/people/profile-s-2.png" alt="" />
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p>I find the mobile app very useful when I'm on the go. Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p></blockquote>
-                                <p class="source">@JackT, San Francisco</p>
-                            </div><!--//quote-content-->
-                        </div><!--//quote-->
                     </div><!--//content-->
                     <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-pull-4 col-sm-pull-0 col-xs-pull-0">
-                        <img class="img-responsive" src="assets/images/figures/figure-2.png" alt="" />
-                        <div class="control text-center">
-                            <button type="button" class="play-trigger" data-toggle="modal" data-target="#modal-video" data-backdrop="static" data-keyboard="false"><i class="fa fa-play"></i></button>                    
-                        </div><!--//control-->
+                        <img class="img-responsive" src="<?php echo base_url('assets/images/noun_project/bike-rack.svg'); ?>" alt=""  style="width: 200px;"/>
                     </figure>
                 </div><!--//item-->
-                
-                <div class="row item ">
-                    <div class="content col-md-4 col-sm-12 col-xs-12">
-                        <h3 class="title">Easy to customise</h3>
-                        <div class="desc">
-                            <p>Explain one of your product benefits here. Let users know how they can benefit using your product. It’s also a good idea to back it up with a testimonial or tweet from your users.</p>
-                            <p>The original PSD of the graphic is included in the package. You can easily customise the PSD to meet your needs.</p>
-                        </div>
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="assets/images/people/profile-s-3.png" alt="" />
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p>Nice template! It’s practical and there is no gimmicks. Very easy to customise as well!</p></blockquote>
-                                <p class="source"><a href="index.html#">@AlexD</a>, London</p>
-                            </div><!--//quote-content-->
-                        </div><!--//quote-->
-                    </div><!--//content-->
-                    <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
-                        <img class="img-responsive" src="assets/images/figures/figure-3.png" alt="" />
-                        <figcaption class="figure-caption">(Screenshot: <a href="../website-templates/responsive-bootstrap-theme-for-startups-tempo/index-ref=3wm.html" target="_blank">Tempo - Bootstrap template for startups)</a> </figcaption>
-
-                    </figure>
-                </div><!--//item-->
-                
-                <div class="row item last-item">
-                    <div class="content col-md-4 col-sm-12 col-xs-12 col-md-push-8 col-sm-push-0 col-xs-push-0">
-                        <h3 class="title">Connect your users</h3>
-                        <div class="desc">
-                            <p>Explain one of your product benefits here. Let users know how they can benefit using your product. It’s also a good idea to back it up with a testimonial or tweet from your users.</p>
-                            <p>The original PSD of the graphic is included in the package. You can easily customise the PSD to meet your needs.</p>
-                            
-                        </div>
-                        
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="assets/images/people/profile-s-4.png" alt="" />
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p>I can connect to like-minded people lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p></blockquote>
-                                <p class="source">@JackT, San Francisco</p>
-                            </div><!--//quote-content-->
-                        </div><!--//quote-->
-                    </div><!--//content-->
-                    <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-pull-4 col-sm-pull-0 col-xs-pull-0">
-                        <img class="img-responsive" src="assets/images/figures/figure-4.png" alt="" />
-                    </figure>
-                </div><!--//item-->
-                
-                
-                <div class="feature-lead text-center">
-                    <h4 class="title">Want to discover all the features?</h4>
-                    <p><a class="btn btn-cta btn-cta-secondary" href="features.html">Take a Tour</a></p>
-                </div>
             </div><!--//container-->
-        </section><!--//why-->  
-        
-        <!-- ******Testimonials Section****** -->
-        <section class="section testimonials">
-            <div class="container">
-                <h2 class="title text-center">What are people saying about Kuklos?</h2>
-                <div id="testimonials-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#testimonials-carousel" data-slide-to="1"></li>
-                        <li data-target="#testimonials-carousel" data-slide-to="2"></li>
-                    </ol><!--//carousel-indicators-->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <figure class="profile"><img src="assets/images/people/profile-m-1.png" alt="" /></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>We used Kuklos as a front-end design template for our product site. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum elit tortor, consectetur vitae varius at, interdum eget libero. Morbi.</p>
-                                </blockquote>
-                                <p class="source">Kevin Knight<br /><span class="title">Co-Founder, Startup Hub</span></p>
-                            </div><!--//content-->
-                        </div><!--//item-->
-                        <div class="item">
-                            <figure class="profile"><img src="assets/images/people/profile-m-2.png" alt="" /></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint.</p>
-                                </blockquote>
-                                <p class="source">Diana	Luna<br /><span class="title">Entrepreneur, Maecenas</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->  
-                        <div class="item">
-                            <figure class="profile"><img src="assets/images/people/profile-m-3.png" alt="" /></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere.</p>
-                                </blockquote>
-                                <p class="source">Tony Lee<br /><span class="title">CTO, Lorem Ipsum</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->                                         
-                    </div><!--//carousel-inner-->
-                    
-                </div><!--//carousel-->
-            </div><!--//container-->
-        </section><!--//testimonials-->          
-        
+        </section><!--//why-->
         
         <!-- ******CTA Section****** -->
         <section id="cta-section" class="section cta-section text-center home-cta-section">
