@@ -2478,6 +2478,7 @@ input[type="button"] {
     font-size: 14px;
     position: relative;
     z-index: 20;
+    box-shadow: 0px 500px 0px 500px #1e1e1e;
 }
 .footer p {
     -webkit-opacity: 0.5;

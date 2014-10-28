@@ -28,7 +28,6 @@
                     <ul class="nav navbar-nav">
                         <li class="active nav-item"><a href="<?php echo base_url(); ?>">Home</a></li>
                         <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
-                        <li class="nav-item"><a href="<?php echo base_url('contact'); ?>">Contact</a></li>
                     <?php if ($this->user_model->is_logged_in()) { ?>
                         <li class="nav-item"><a href="<?php echo base_url('user/logout'); ?>">Logout</a></li>
                         <?php if ($this->user_model->is_admin($this->session->userdata('email'))) echo '<li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="'.base_url('admin').'">Sign Up Free</a></li>'; ?>
