@@ -9,10 +9,24 @@ class Home extends CI_Controller {
 	}
 
 	public function index() {
-		$data['page_name'] = "home-page";
 		$this->template
 			->title('Kuklos', 'Vancouver\'s #1 Bike Rack Directory')
-			->build('pages/home', $data);
+			->set('page_name', 'home-page');
+
+		if ($this->user_model->is_logged_in()) {
+			$this->application();
+		} else {
+			$this->splash();
+		}
+		
+	}
+
+	private function splash() {
+		$this->template->build('pages/home');
+	}
+
+	private function application() {
+		$this->template->build('pages/home');
 	}
 }
 

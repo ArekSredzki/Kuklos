@@ -23,6 +23,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger fade in">', '<button type="button" class="close" data-dismiss="alert">&times;</button></div>'); 
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[50]|xss_clean|strip_tags|valid_email|is_unique[users.email]');
 		$this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]|max_length[30]');
+		$this->form_validation->set_message('is_unique', 'That %s is taken.');
 
 		if ($this->form_validation->run() == False) {
 			$data['page_name'] = "signup-page";

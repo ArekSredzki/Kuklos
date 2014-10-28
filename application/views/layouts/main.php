@@ -7,7 +7,8 @@
     <?php echo $template['partials']['header']; ?>
 
 </head>
-<body class="<?php echo $page_name; ?>"> 
+<body class="<?php echo $page_name; ?>">
+    <?php if ($page_name !='home-page') echo '<div class="wrapper">'; ?>
     <!-- ******HEADER****** --> 
     <header id="header" class="header">  
         <div class="container">
@@ -26,20 +27,8 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active nav-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <li class="nav-item"><a href="features.html">Features</a></li>
-                        <li class="nav-item"><a href="pricing.html">Pricing</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="index.html#">Pages <i class="fa fa-angle-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="download.html">Download Apps</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-single.html">Blog Single</a></li>
-                                <li><a href="blog-category.html">Blog Category</a></li>
-                                <li><a href="blog-archive.html">Blog Archive</a></li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="contact.html">Contact</a></li>                    
-                            </ul>
-                        </li><!--//dropdown-->
+                        <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
+                        <li class="nav-item"><a href="<?php echo base_url('contact'); ?>">Contact</a></li>
                     <?php if ($this->user_model->is_logged_in()) { ?>
                         <li class="nav-item"><a href="<?php echo base_url('user/logout'); ?>">Logout</a></li>
                         <?php if ($this->user_model->is_admin($this->session->userdata('email'))) echo '<li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="'.base_url('admin').'">Sign Up Free</a></li>'; ?>
@@ -54,6 +43,8 @@
     </header><!--//header-->
 
     <?php echo $template['body'] ?>
+
+    <?php if ($page_name !='home-page') echo '</div><!--//wrapper-->'; ?>
 
     <?php echo $template['partials']['footer']; ?>  
 

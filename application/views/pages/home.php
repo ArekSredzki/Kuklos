@@ -13,7 +13,7 @@
         <div class="container text-center">                
             <h2 class="title">Never get stuck without a place to put your bike again!</h2>
             <p class="intro">Kuklos is a mobile-friendly bike rack directory here to help you <br /> make the most out of Vancouver's bike-friendly atmosphere</p>
-            <p><a class="btn btn-cta btn-cta-primary" href="<php echo base_url('user/signup'); ?>">Sign up for free</a></p>
+            <p><a class="btn btn-cta btn-cta-primary" href="<?php echo base_url('user/signup'); ?>">Sign up for free</a></p>
         </div><!--//container-->
     </section><!--//promo-->
     
@@ -23,7 +23,7 @@
         <section id="why" class="section why">
             <div class="container">
                 <h2 class="title text-center">How Can Kuklos Help You?</h2>
-                <p class="intro text-center">Quickly find bike racks near you whether you're at your desk or on mobiile</p>
+                <p class="intro text-center">Quickly find bike racks near you whether you're at your desk or on mobile</p>
                 <div class="row item">
                     <div class="content col-md-4 col-sm-12 col-xs-12">
                         <h3 class="title">Save you time and effort</h3>

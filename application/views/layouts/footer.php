@@ -59,36 +59,6 @@
                     </div><!--//foooter-col-->
                     <div class="clearfix"></div> 
                 </div><!--//row-->
-                <div class="row has-divider">
-                    <div class="footer-col download col-md-6 col-sm-12 col-xs-12">
-                        <div class="footer-col-inner">
-                            <h3 class="title">Mobile apps</h3>
-                            <ul class="list-unstyled download-list">
-                                <li><a class="btn btn-ghost" href="index.html#"><i class="fa fa-apple"></i><span class="text">Download for iOS</span> </a></li>
-                                <li><a class="btn btn-ghost" href="index.html#"><i class="fa fa-android"></i><span class="text">Download for Android</span></a></li>
-                                <li><a class="btn btn-ghost" href="index.html#"><i class="fa fa-windows"></i><span class="text">Windows coming soon...</span></a></li>
-                            </ul>
-                        </div><!--//footer-col-inner-->
-                    </div><!--//download-->
-                    <div class="footer-col contact col-md-6 col-sm-12 col-xs-12">
-                        <div class="footer-col-inner">
-                            <h3 class="title">Contact us</h3>                          
-                            <p class="adr clearfix">
-                                <i class="fa fa-map-marker pull-left"></i>        
-                                <span class="adr-group pull-left">       
-                                    <span class="street-address">College Green</span><br>
-                                    <span class="region">56 College Green Road</span><br>
-                                    <span class="postal-code">BS1 XR18</span><br>
-                                    <span class="country-name">UK</span>
-                                </span>
-                            </p>
-                            <p class="tel"><i class="fa fa-phone"></i>0800 123 4567</p>
-                            <p class="email"><i class="fa fa-envelope-o"></i><a href="index.html#">enquires@website.com</a></p> 
-                            <a href="https://twitter.com/3rdwave_themes" class="twitter-follow-button" data-show-count="false">Follow @3rdwave_themes</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                        
-                        </div><!--//footer-col-inner-->
-                    </div><!--//contact-->
-                </div>
             </div><!--//container-->
         </div><!--//footer-content-->
         <div class="bottom-bar">
@@ -97,23 +67,6 @@
             </div><!--//container-->
         </div><!--//bottom-bar-->
     </footer><!--//footer-->
-    
-    <!-- Video Modal -->
-    <div class="modal modal-video" id="modal-video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 id="videoModalLabel" class="modal-title sr-only">Video Tour</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="video-container">
-                        <iframe src="http://player.vimeo.com/video/28872840?color=ffffff&wmode=transparent" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                    </div><!--//video-container-->
-                </div><!--//modal-body-->
-            </div><!--//modal-content-->
-        </div><!--//modal-dialog-->
-    </div><!--//modal-->
     
     <!-- Javascript -->          
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/jquery-1.11.1.min.js'); ?>"></script>
