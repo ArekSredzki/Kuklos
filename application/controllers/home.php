@@ -9,24 +9,43 @@ class Home extends CI_Controller {
 	}
 
 	public function index() {
-		$this->template
-			->title('Kuklos', 'Vancouver\'s #1 Bike Rack Directory')
-			->set('page_name', 'home-page');
+		$this->template->title('Kuklos', 'Vancouver\'s #1 Bike Rack Directory');
 
 		if ($this->user_model->is_logged_in()) {
-			$this->application();
+			$this->template->set('page_name', 'contact-page')->set_layout('application');
+			if (true) {
+				$this->table_view();
+			} else {
+				$this->map_view();
+			}
 		} else {
+			$this->template->set('page_name', 'home-page');
 			$this->splash();
 		}
-		
 	}
 
 	private function splash() {
 		$this->template->build('pages/home');
 	}
 
-	private function application() {
-		$this->template->build('pages/home');
+	private function table_view() {
+		$this->load->library('table');
+
+		$data = array();
+
+		// Generate Table
+		$tmpl = array ( 'table_open'  => '<table class="table table-hover">' );
+		$this->table->set_template($tmpl);
+		$this->table->set_heading('ID', 'Address', 'Latitude', 'Longitude', '# of Racks');
+		$data['rack_table'] = $this->table->generate($this->rack_model->get_all_racks());
+
+		$this->template->build('pages/table_view', $data);
+	}
+
+	private function map_view() {
+		$data = array();
+
+		$this->template->build('pages/map_view', $data);
 	}
 }
 

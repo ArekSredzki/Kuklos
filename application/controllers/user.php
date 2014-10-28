@@ -12,6 +12,13 @@ class User extends CI_Controller {
 		redirect(base_url());
 	}
 
+	public function switch_view() {
+		if (!$this->user_model->is_logged_in())
+			redirect(base_url());
+		
+		redirect(base_url());
+	}
+
 	//		$this->form_validation->set_rules('username', 'Username', 'required|trim|min_length[4]|max_length[32]|is_unique[users.username]|xss_clean|strip_tags');
 
 	public function signup() {
@@ -159,8 +166,6 @@ class User extends CI_Controller {
 	}
 
 	public function validate_credentials() {
-		$this->load->model('user_model');
-
 		if ($this->user_model->can_login($this->user_model->get_email($this->input->post('email')))) {
 			return true;
 		} else {
