@@ -37,14 +37,19 @@ class Home extends CI_Controller {
 		$tmpl = array ( 'table_open'  => '<table class="table table-hover">' );
 		$this->table->set_template($tmpl);
 		$this->table->set_heading('ID', 'Address', 'Latitude', 'Longitude', '# of Racks');
-		$data['rack_table'] = $this->table->generate($this->rack_model->get_all_racks());
+		$data['rack_table'] = $this->table->generate($this->rack_model->get_all_racks_query());
 
+		$this->template->set('page_name', 'table-page');
 		$this->template->build('pages/table_view', $data);
 	}
 
 	private function map_view() {
 		$data = array();
+		$this->load->helper('map');
 
+		$data['map_elements'] = generate_map_rack_js($this->rack_model->get_all_racks());
+
+		$this->template->set('page_name', 'map-page');
 		$this->template->build('pages/map_view', $data);
 	}
 }

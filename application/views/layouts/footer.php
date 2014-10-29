@@ -21,6 +21,25 @@
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/FitVids/jquery.fitvids.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/flexslider/jquery.flexslider-min.js'); ?>"></script>     
     <script type="text/javascript" src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+
+
+    <?php if (isset($page_name) && $page_name == 'map-page') { ?>
+
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/gmaps/gmaps.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/map.js'); ?>"></script>
+
+    <script type="text/javascript">
+        var map;
+        jQuery(document).ready(function(){
+
+            map = new GMaps({
+                div: '#map',
+                lat: 49.281161,
+                lng:  -123.121322,
+            });
+            <?php echo $map_elements; ?>
+
+        });
+    </script>
+
+    <?php } ?>

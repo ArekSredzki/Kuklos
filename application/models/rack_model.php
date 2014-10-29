@@ -57,11 +57,15 @@ class Rack_Model extends CI_Model {
 	 // GENERAL FUNCTIONS //
 	///////////////////////
 
-	function get_all_racks() {
+	function get_all_racks_query() {
 		$this->db->select(array('rack_id', 'address', 'lat', 'lon', 'rack_count'));
 		$query = $this->db->get('racks');
 
 		return $query;
+	}
+
+	function get_all_racks() {
+		return $this->get_all_racks_query()->result_array();
 	}
 	
 	  /////////////////////////////
