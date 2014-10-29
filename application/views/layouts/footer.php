@@ -6,7 +6,7 @@
         </div><!--//footer-content-->
         <div class="bottom-bar">
             <div class="container">
-                <small class="copyright">Copyright @ 2014 <a href="../index.html" target="_blank">Kuklos</a></small>                
+                <small class="copyright">Copyright <i class="fa fa-bicycle"></i> 2014 <a href="<?php echo base_url(); ?>" target="_blank">Kuklos</a></small>                
             </div><!--//container-->
         </div><!--//bottom-bar-->
     </footer><!--//footer-->
@@ -21,3 +21,6 @@
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/FitVids/jquery.fitvids.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/flexslider/jquery.flexslider-min.js'); ?>"></script>     
     <script type="text/javascript" src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/plugins/gmaps/gmaps.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/map.js'); ?>"></script>

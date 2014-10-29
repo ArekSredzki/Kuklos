@@ -41,7 +41,7 @@
 $route['default_controller'] = "home";
 $route['switch_view'] = "user/switch_view";
 
-$route['404_override'] = '';
+$route['404_override'] = 'error';
 
 
 /* End of file routes.php */

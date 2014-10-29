@@ -17,8 +17,8 @@ class Rack_Model extends CI_Model {
 	function create_rack($rack_id, $address, $lat, $lon, $rack_count) {
 
 		$data = array(
-			'rack_id' => $rack_id,
-			'address' => $address,
+			'hash' => $address,
+			'address' => strtolower($address),
 			'lat' => $lat,
 			'lon' => $lon,
 			'rack_count' => $rack_count
@@ -58,6 +58,7 @@ class Rack_Model extends CI_Model {
 	///////////////////////
 
 	function get_all_racks() {
+		$this->db->select(array('rack_id', 'address', 'lat', 'lon', 'rack_count'));
 		$query = $this->db->get('racks');
 
 		return $query;

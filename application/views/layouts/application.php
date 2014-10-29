@@ -27,13 +27,14 @@
                     </div><!--//navbar-header-->
                     <div id="navbar-collapse" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item nav-item-main-site last"><a href="<?php echo base_url('user/logout'); ?>"><i class="fa fa-home"></i> Logout</a></li>
+                            <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
+                            <li class="nav-item nav-item-main-site last"><a href="<?php echo base_url('user/logout'); ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul><!--//nav-->
                         
                         <div class="searchbox-container">
                             <form class="searchbox">
                                 <label class="sr-only" for="search-form">Search</label>
-                                <input id="search-form" class="form-control searchbox-input" onkeyup="buttonUp();" placeholder="Search the blog..." type="search" value="" name="search-form">
+                                <input id="search-form" class="form-control searchbox-input" onkeyup="buttonUp();" placeholder="Search the Kuklos..." type="search" value="" name="search-form">
                                 <input class="searchbox-submit" type="submit" value="GO">
                                 <i class="fa fa-search searchbox-icon"></i>
                             </form>

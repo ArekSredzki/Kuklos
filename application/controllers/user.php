@@ -15,6 +15,12 @@ class User extends CI_Controller {
 	public function switch_view() {
 		if (!$this->user_model->is_logged_in())
 			redirect(base_url());
+
+		if ($this->session->userdata('default_view') == 'map') {
+			$this->session->set_userdata('default_view', 'table');
+		} else {
+			$this->session->set_userdata('default_view', 'map');
+		}
 		
 		redirect(base_url());
 	}
@@ -62,7 +68,8 @@ class User extends CI_Controller {
 
 					$data = array(
 						'email' => $this->input->post('email'),
-						'is_logged_in' => 1
+						'is_logged_in' => 1,
+						'default_view' => 'map'
 					);
 					$this->session->set_userdata($data);
 
@@ -94,7 +101,8 @@ class User extends CI_Controller {
 
 			$data = array(
 				'email' => $this->input->post('email'),
-				'is_logged_in' => 1
+				'is_logged_in' => 1,
+				'default_view' => 'map'
 			);
 			$this->session->set_userdata($data);
 

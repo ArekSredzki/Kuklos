@@ -13,10 +13,10 @@ class Home extends CI_Controller {
 
 		if ($this->user_model->is_logged_in()) {
 			$this->template->set('page_name', 'contact-page')->set_layout('application');
-			if (true) {
-				$this->table_view();
-			} else {
+			if ($this->session->userdata('default_view') == 'map') {
 				$this->map_view();
+			} else {
+				$this->table_view();
 			}
 		} else {
 			$this->template->set('page_name', 'home-page');

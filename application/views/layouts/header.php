@@ -31,7 +31,7 @@
     <!-- Global CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap/css/bootstrap.min.css'); ?>">   
     <!-- Plugins CSS -->    
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/font-awesome/css/font-awesome.css'); ?>">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/flexslider/flexslider.css'); ?>">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="<?php echo base_url('assets/css/styles.css'); ?>">
