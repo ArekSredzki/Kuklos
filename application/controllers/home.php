@@ -57,6 +57,7 @@ class Home extends CI_Controller {
 		$config['center'] = '49.28, -123.13';
 		$config['zoom'] = 'auto';
 		$config['places'] = TRUE;
+		$config['cluster'] = TRUE;
 		$config['placesAutocompleteInputID'] = 'search-form-input';
 		$config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
 		$config['placesAutocompleteOnChange'] = 'document.getElementById("search-form").submit();';
