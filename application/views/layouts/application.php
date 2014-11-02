@@ -32,9 +32,9 @@
                         </ul><!--//nav-->
                         
                         <div class="searchbox-container">
-                            <form class="searchbox">
+                            <form class="searchbox" id="search-form">
                                 <label class="sr-only" for="search-form">Search</label>
-                                <input id="search-form" class="form-control searchbox-input" onkeyup="buttonUp();" placeholder="Search the Kuklos..." type="search" value="" name="search-form">
+                                <input id="search-form-input" class="form-control searchbox-input" placeholder="Search Kuklos..." type="search" value="" name="search">
                                 <input class="searchbox-submit" type="submit" value="GO">
                                 <i class="fa fa-search searchbox-icon"></i>
                             </form>

@@ -1507,13 +1507,11 @@ input[type="button"] {
 /* ======= Map section ======= */
 .map-section {
     /*padding-top: 80px;*/
-    padding-bottom: 80px;
+    /*padding-bottom: 80px;*/
 }
 .map-section .title {
-    font-size: 36px;
     font-weight: 300;
     margin-top: 0;
-    margin-bottom: 30px;
 }
 .map-section .gmap-wrapper {
     padding: 10px;
@@ -1529,28 +1527,6 @@ input[type="button"] {
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-}
-.map-section .gmap {
-    height: 650px;
-    text-align: left;
-    font-weight: normal;
-}
-.map-section .gmap,
-.map-section .gmap *,
-.map-section .gmap *:before,
-.map-section .gmap *:after {
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-}
-.map-section .gmap .title {
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 15px;
-    margin-top: 5px;
-}
-.map-section .gmap .gm-style-iw {
-    width: 150px;
 }
 /* ======= Blog Slideshow ======= */
 .blog-slider {
@@ -2918,6 +2894,9 @@ input[type="button"] {
 }
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
+    #map_canvas {
+        height: 450px !important;
+    }
     .config-wrapper {
         display: none;
     }
@@ -3142,6 +3121,9 @@ input[type="button"] {
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+    #map_canvas {
+        height: 650px !important;
+    }
     .config-wrapper {
         display: none;
     }
@@ -3230,6 +3212,9 @@ input[type="button"] {
 }
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    #map_canvas {
+        height: 750px !important;
+    }
     .config-wrapper {
         display: block;
     }

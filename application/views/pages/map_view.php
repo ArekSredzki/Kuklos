@@ -14,9 +14,8 @@
                 <section class="map-section section">
                     <div class="container text-center">
                         <div class="gmap-wrapper">
-                            <div class="gmap" id="map"></div><!--//map-->
+                            <?php echo $map['html']; ?><!--//map-->
                         </div><!--//gmap-wrapper-->
                     </div><!--//container-->
                 </section><!--//map-section-->
-
-
+                

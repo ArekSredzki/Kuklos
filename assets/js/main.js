@@ -19,25 +19,7 @@ $(document).ready(function() {
     /* ======= jQuery Placeholder ======= */
     /* Ref: https://github.com/mathiasbynens/jquery-placeholder */
     
-    $('input, textarea').placeholder();    
-    
-    /* ======= jQuery FitVids - Responsive Video ======= */
-    /* Ref: https://github.com/davatron5000/FitVids.js/blob/master/README.md */
-    
-    $(".video-container").fitVids();
-    
-    /* ======= FAQ accordion ======= */
-    function toggleIcon(e) {
-    $(e.target)
-        .prev('.panel-heading')
-        .find('.panel-title a')
-        .toggleClass('active')
-        .find("i.fa")
-        .toggleClass('fa-plus-square fa-minus-square');
-    }
-    $('.panel').on('hidden.bs.collapse', toggleIcon);
-    $('.panel').on('shown.bs.collapse', toggleIcon);    
-    
+    $('input, textarea').placeholder(); 
     
     /* ======= Header Background Slideshow - Flexslider ======= */    
     /* Ref: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties */
@@ -48,19 +30,6 @@ $(document).ready(function() {
         controlNav: false, //remove the default control-nav
         slideshowSpeed: 8000
     });
-	
-	/* ======= Stop Video Playing When Close the Modal Window ====== */
-    $("#modal-video .close").on("click", function() {
-        $("#modal-video iframe").attr("src", $("#modal-video iframe").attr("src"));        
-    });
-     
-    
-     /* ======= Testimonial Bootstrap Carousel ======= */
-     /* Ref: http://getbootstrap.com/javascript/#carousel */
-    $('#testimonials-carousel').carousel({
-      interval: 8000 
-    });
-
 
    /* ======= Blog page searchbox ======= */
    /* Ref: http://thecodeblock.com/expanding-search-bar-with-jquery-tutroial/ */

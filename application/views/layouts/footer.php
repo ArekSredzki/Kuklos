@@ -12,7 +12,7 @@
     </footer><!--//footer-->
     
     <!-- Javascript -->          
-    <script type="text/javascript" src="<?php echo base_url('assets/plugins/jquery-1.11.1.min.js'); ?>"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/jquery-migrate-1.2.1.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.min.js'); ?>"></script> 
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap-hover-dropdown.min.js'); ?>"></script>
@@ -23,23 +23,25 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/main.js'); ?>"></script>
 
 
-    <?php if (isset($page_name) && $page_name == 'map-page') { ?>
+    <?php if (isset($page_name)) { ?>
 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/plugins/gmaps/gmaps.js'); ?>"></script>
+        <?php if ($page_name == 'map-page') { ?>
+            <?php echo $map['js']; ?>
 
-    <script type="text/javascript">
-        var map;
-        jQuery(document).ready(function(){
+            <script type="text/javascript" src="<?php echo base_url('assets/js/map_view.js'); ?>"></script>
 
-            map = new GMaps({
-                div: '#map',
-                lat: 49.281161,
-                lng:  -123.121322,
-            });
-            <?php echo $map_elements; ?>
+        <?php } else if ($page_name == 'table-page') { ?>
 
-        });
-    </script>
+            <script type="text/javascript">
+                var gotPositon = <?php echo $gotPositon; ?>;
 
-    <?php } ?>
+
+            </script>
+
+            <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/380cb78f450/integration/bootstrap/3/dataTables.bootstrap.css">   
+            <script type="text/javascript" src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="//cdn.datatables.net/plug-ins/380cb78f450/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/table_view.js'); ?>"></script>
+        <?php }
+    } ?>
