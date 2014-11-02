@@ -53,7 +53,7 @@ class Home extends CI_Controller {
 		$this->load->library('googlemaps');
 
 		$config['geocodeCaching'] = TRUE;
-		$config['minifyJS'] = TRUE;
+		$config['minifyJS'] = FALSE;
 		$config['center'] = '49.28, -123.13';
 		$config['zoom'] = 'auto';
 		$config['places'] = TRUE;
@@ -71,7 +71,18 @@ class Home extends CI_Controller {
 			$marker['title'] = $rack['address'];
 			$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$rack['address'].
 				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span></p>";
-			$marker['icon'] = "new google.maps.MarkerImage('".base_url()."assets/images/noun_project/bike_rack.svg', null, null, null, new google.maps.Size(64,64))";
+
+			if ($rack['rack_count'] == 1) {
+				$icon_url = base_url()."assets/images/noun_project/bike-rack-1.svg";
+			} else if ($rack['rack_count'] == 2) {
+				$icon_url = base_url()."assets/images/noun_project/bike-rack-2.svg";
+			} else if ($rack['rack_count'] == 3) {
+				$icon_url = base_url()."assets/images/noun_project/bike-rack-3.svg";
+			} else {
+				$icon_url = base_url()."assets/images/noun_project/bike-rack.svg";
+			}
+			
+			$marker['marker_image'] = "new google.maps.MarkerImage('".$icon_url."', null, null, null, new google.maps.Size(64,64))";
 
 			$this->googlemaps->add_marker($marker);
 		}

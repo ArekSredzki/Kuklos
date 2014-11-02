@@ -189,6 +189,7 @@ class Googlemaps {
 		$marker['cursor'] = '';									// The name or url of the cursor to display on hover
 		$marker['draggable'] = FALSE;							// Defines if the marker is draggable
 		$marker['flat'] = FALSE;								// If set to TRUE will not display a shadow beneath the icon
+		$marker['marker_image'] = '';							// Raw MarkerImage code
 		$marker['icon'] = '';									// The name or url of the icon to use for the marker
 		$marker['icon_size'] = '';								// The display size of the sprite or image being used. When using sprites, you must specify the sprite size. Expecting two comma-separated values for width and height respectively (ie '20,30'). See https://developers.google.com/maps/documentation/javascript/3.exp/reference#Icon
 		$marker['icon_scaledSize'] = '';						// The size of the entire image after scaling, if any. Use this property to stretch/shrink an image or a sprite. Expecting two comma-separated values for width and height respectively (ie '20,30')
@@ -247,6 +248,11 @@ class Googlemaps {
 			}
 		}
 		
+		if ($marker['marker_image']!="") {
+			$marker_output .= '
+				var marker_icon = '.$marker['marker_image'].';';
+		}
+		
 		if ($marker['icon']!="") {
 			$marker_output .= '
 				var marker_icon = {
@@ -294,7 +300,7 @@ class Googlemaps {
 			$marker_output .= ',
 				flat: true';
 		}
-		if ($marker['icon']!="") {
+		if ($marker['icon']!="" || $marker['marker_image']!="") {
 			$marker_output .= ',
 				icon: marker_icon';
 		}
