@@ -18,7 +18,6 @@
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap-hover-dropdown.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/back-to-top.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/jquery-placeholder/jquery.placeholder.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/plugins/FitVids/jquery.fitvids.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/plugins/flexslider/jquery.flexslider-min.js'); ?>"></script>     
     <script type="text/javascript" src="<?php echo base_url('assets/js/main.js'); ?>"></script>
 
@@ -28,6 +27,7 @@
         <?php if ($page_name == 'map-page') { ?>
             <?php echo $map['js']; ?>
 
+            <script type="text/javascript" src="<?php echo base_url('assets/plugins/geoPosition.js'); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/map_view.js'); ?>"></script>
 
         <?php } else if ($page_name == 'table-page') { ?>
@@ -37,6 +37,8 @@
 
 
             </script>
+
+            <script type="text/javascript" src="<?php echo base_url('assets/plugins/geoPosition.js'); ?>"></script>
 
             <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/380cb78f450/integration/bootstrap/3/dataTables.bootstrap.css">   
             <script type="text/javascript" src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
