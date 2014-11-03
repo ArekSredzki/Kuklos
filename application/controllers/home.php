@@ -34,16 +34,34 @@ class Home extends CI_Controller {
 		$data = array();
 
 		$this->load->library('googlemaps');
+		$data['gotPosition'] = FALSE;
 
-		$config['geocodeCaching'] = TRUE;
-		$config['minifyJS'] = TRUE;
+		if ($this->input->get('search') != '') {
+			$data['gotPosition'] = TRUE;
+
+			$config['geocodeCaching'] = TRUE;
+			$this->googlemaps->initialize($config);
+			$gmaps_result = $this->googlemaps->get_lat_long_from_address($this->input->get('search'));
+			$lat = $gmaps_result[0];
+			$lon = $gmaps_result[1];
+		} else if ($this->input->post('lat') != '' && $this->input->post('lon') != '') {
+			$data['gotPosition'] = TRUE;
+			$lat = $this->input->post('lat');
+			$lon = $this->input->post('lon');
+		}
 
 		// Generate Table
-		$tmpl = array ( 'table_open'  => '<table class="table table-hover">' );
+		$tmpl = array ( 'table_open'  => '<table id="rack-table" class="table table-hover table-responsive">' );
 		$this->table->set_template($tmpl);
-		$this->table->set_heading('ID', 'Address', 'Distance', '# of Racks');
-		$data['rack_table'] = $this->table->generate($this->rack_model->get_all_racks_query());
 
+		if ($data['gotPosition']) {
+			$this->table->set_heading('Address', 'Distance (m)', '# of Racks');
+			$data['rack_table'] = $this->table->generate($this->rack_model->get_racks_by_distance_query($lat, $lon));
+		} else {
+			$this->table->set_heading('Address', '# of Racks');
+			$data['rack_table'] = $this->table->generate($this->rack_model->get_all_racks_basic_query());
+		}
+		
 		$this->template->set('page_name', 'table-page');
 		$this->template->build('pages/table_view', $data);
 	}
@@ -61,7 +79,7 @@ class Home extends CI_Controller {
 			$marker = array();
 			$marker['position'] = $this->input->get('search');
 			$marker['title'] = $this->input->get('search');
-			$marker['marker_image'] = "new google.maps.MarkerImage('".base_url()."assets/images/noun_project/marker.svg', null, null, null, new google.maps.Size(64,64))";
+			$marker['marker_image'] = "new google.maps.MarkerImage('".base_url()."assets/images/noun_project/marker.svg', null, null, null, new google.maps.Size(42.67,64))";
 			$this->googlemaps->add_marker($marker);
 		} else {
 			$config['center'] = '49.28, -123.13';
@@ -72,7 +90,8 @@ class Home extends CI_Controller {
 		$config['cluster'] = TRUE;
 		$config['placesAutocompleteInputID'] = 'search-form-input';
 		$config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
-		$config['placesAutocompleteOnChange'] = 'document.getElementById("search-form").submit();';
+		$config['placesAutocompleteOnChange'] = 'document.getElementById("search-form-input").value = placesAutocomplete.getPlace().formatted_address;
+document.getElementById("search-form").submit();';
 		$this->googlemaps->initialize($config);
 
 		$racks = $this->rack_model->get_all_racks();

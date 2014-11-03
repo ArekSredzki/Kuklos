@@ -32,13 +32,11 @@
 
         <?php } else if ($page_name == 'table-page') { ?>
 
-            <script type="text/javascript">
-                var gotPositon = <?php echo $gotPositon; ?>;
-
-
-            </script>
-
             <script type="text/javascript" src="<?php echo base_url('assets/plugins/geoPosition.js'); ?>"></script>
+
+            <script type="text/javascript">
+                var gotPosition = <?php echo ($gotPosition ? 'true' : 'false'); ?>;
+            </script>
 
             <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/380cb78f450/integration/bootstrap/3/dataTables.bootstrap.css">   
             <script type="text/javascript" src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>

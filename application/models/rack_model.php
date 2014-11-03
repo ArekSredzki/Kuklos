@@ -57,6 +57,34 @@ class Rack_Model extends CI_Model {
 	 // GENERAL FUNCTIONS //
 	///////////////////////
 
+	// Requires lat and lon of other coordinate and bounding distance to filter by (# of degrees of max difference between given coord and entries)
+	// Returns all the racks ordered by distance to the provided coordinate
+	// Distance is in meters
+	function get_racks_by_distance_query($lat, $lon, $bounding_distance = 1) {
+
+		$this->db->select(array('address',
+			'round(6371000 * acos( cos(radians('.$lat.')) * cos(radians(`lat`)) * cos(radians( `lon`) - radians('.$lon.')) + sin(radians('.$lat.')) * sin(radians(`lat`)))) AS `distance`',
+			'rack_count'));
+
+		$where = "(
+		  `lat` BETWEEN (".$lat." - ".$bounding_distance.") AND (".$lat." + ".$bounding_distance.")
+		  AND `lon` BETWEEN (".$lon." - ".$bounding_distance.") AND (".$lon." + ".$bounding_distance.")
+		)";
+		$this->db->from('racks')->where($where)->order_by('distance', 'asc');
+		$query = $this->db->get();
+
+		return $query;
+	}
+
+	// Returns a CI query result object containing the address and rack_count fields of all the racks
+	function get_all_racks_basic_query() {
+		$this->db->select(array('address', 'rack_count'));
+		$query = $this->db->get('racks');
+
+		return $query;
+	}
+
+	// Returns a CI query result object containing all the racks
 	function get_all_racks_query() {
 		$this->db->select(array('rack_id', 'address', 'lat', 'lon', 'rack_count'));
 		$query = $this->db->get('racks');
@@ -64,6 +92,7 @@ class Rack_Model extends CI_Model {
 		return $query;
 	}
 
+	// Returns an array containing all the racks
 	function get_all_racks() {
 		return $this->get_all_racks_query()->result_array();
 	}

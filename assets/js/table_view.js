@@ -1,5 +1,3 @@
-$(document).ready(function() {
-	
 	function lookup_location() {
 		geoPosition.getCurrentPosition(update_pos);
 	}
@@ -7,6 +5,9 @@ $(document).ready(function() {
 	function update_pos(loc) {
 		window.location.replace("http://kuklos.vikom.io/?lat="+loc.coords.latitude+"&lon="+loc.coords.longitude);
 	}
+
+
+$(document).ready(function() {
 
 	var southWest = new google.maps.LatLng( 49.119610, -123.326877 );
 	var northEast = new google.maps.LatLng( 49.381364, -122.848972 );
@@ -18,11 +19,18 @@ $(document).ready(function() {
 	
 	placesAutocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
 	google.maps.event.addListener(placesAutocomplete, 'place_changed', function() {
+		document.getElementById("search-form-input").value = placesAutocomplete.getPlace().formatted_address;
 		document.getElementById("search-form").submit();
 	});
 
-    $('#map-table').dataTable( {
-        "order": [[ 2, "desc" ]]
-    } );
+	if (gotPosition) {
+	    $('#rack-table').dataTable( {
+	        "order": [[ 1, "asc" ]],
+	    } );
+	} else {
+	    $('#rack-table').dataTable( {
+	        "order": [[ 1, "desc" ]],
+	    } );
+	};
 
 } );
