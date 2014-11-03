@@ -14,10 +14,9 @@ class Rack_Model extends CI_Model {
 
 
 	// Add new rack to database
-	function create_rack($rack_id, $address, $lat, $lon, $rack_count) {
+	function create_rack($address, $lat, $lon, $rack_count) {
 
 		$data = array(
-			'hash' => $address,
 			'address' => strtolower($address),
 			'lat' => $lat,
 			'lon' => $lon,

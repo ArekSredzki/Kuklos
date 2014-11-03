@@ -136,6 +136,15 @@ input[type="button"] {
     appearance: none;
     /* for mobile safari */
 }
+
+
+.input-group-btn .btn {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    height: 40px;
+    border-color: #efefef;
+}
 #topcontrol {
     background: #5d80a1;
     color: #fff;

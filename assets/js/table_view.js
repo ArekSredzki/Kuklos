@@ -25,8 +25,8 @@
 
 $(document).ready(function() {
 
-	var southWest = new google.maps.LatLng( 49.119610, -123.326877 );
-	var northEast = new google.maps.LatLng( 49.381364, -122.848972 );
+	var southWest = new google.maps.LatLng( 49.0, -123.3 );
+	var northEast = new google.maps.LatLng( 49.5, -122.9 );
 	var vancouverBounds = new google.maps.LatLngBounds( southWest, northEast );
 
 	var placesAutocomplete;
