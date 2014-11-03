@@ -12,7 +12,7 @@
                                 <form action="<?php echo base_url('admin/load_xls'); ?>" method="post">
                                     <div class="input-group">
                                         <span class="input-group-addon">ftp://webftp.vancouver.ca</span>
-                                        <input type="text" class="form-control" placeholder="Path XLS Rack file" name="url">
+                                        <input type="text" class="form-control" placeholder="Path to XLS Rack file" name="url">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit">Process Rack XLS</button>
                                         </span>
