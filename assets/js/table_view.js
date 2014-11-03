@@ -1,10 +1,26 @@
 	function lookup_location() {
-		geoPosition.getCurrentPosition(update_pos);
+		if (geoPosition.init()) {
+			geoPosition.getCurrentPosition(update_pos, function(){});
+		}
 	}
 
 	function update_pos(loc) {
-		window.location.replace("http://kuklos.vikom.io/?lat="+loc.coords.latitude+"&lon="+loc.coords.longitude);
+		var redirect = 'http://kuklos.vikom.io/';
+		$.redirectPost(redirect, {lat: loc.coords.latitude, lon: loc.coords.longitude});
 	}
+
+	// jquery extend function
+	$.extend(
+	{
+	    redirectPost: function(location, args)
+	    {
+	        var form = '';
+	        $.each( args, function( key, value ) {
+	            form += '<input type="hidden" name="'+key+'" value="'+value+'">';
+	        });
+	        $('<form action="'+location+'" method="POST">'+form+'</form>').appendTo('body').submit();
+	    }
+	});
 
 
 $(document).ready(function() {
@@ -31,6 +47,7 @@ $(document).ready(function() {
 	    $('#rack-table').dataTable( {
 	        "order": [[ 1, "desc" ]],
 	    } );
+	    lookup_location();
 	};
 
 } );
