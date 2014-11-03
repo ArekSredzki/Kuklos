@@ -54,8 +54,20 @@ class Home extends CI_Controller {
 
 		$config['geocodeCaching'] = TRUE;
 		$config['minifyJS'] = FALSE;
-		$config['center'] = '49.28, -123.13';
-		$config['zoom'] = 'auto';
+		if ($this->input->get('search') != '') {
+			$config['center'] = $this->input->get('search');
+			$config['zoom'] = '14';
+
+			$marker = array();
+			$marker['position'] = $this->input->get('search');
+			$marker['title'] = $this->input->get('search');
+			$marker['marker_image'] = "new google.maps.MarkerImage('".base_url()."assets/images/noun_project/marker.svg', null, null, null, new google.maps.Size(64,64))";
+			$this->googlemaps->add_marker($marker);
+		} else {
+			$config['center'] = '49.28, -123.13';
+			$config['zoom'] = 'auto';
+		}
+
 		$config['places'] = TRUE;
 		$config['cluster'] = TRUE;
 		$config['placesAutocompleteInputID'] = 'search-form-input';
