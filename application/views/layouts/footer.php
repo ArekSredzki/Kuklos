@@ -24,7 +24,11 @@
 
     <?php if (isset($page_name)) { ?>
 
-        <?php if ($page_name == 'map-page') { ?>
+        <?php if ($page_name == 'rack-page') { 
+            if (isset($map)) {
+                echo $map['js'];
+            }
+        } else if ($page_name == 'map-page') { ?>
             <?php echo $map['js']; ?>
 
             <script type="text/javascript" src="<?php echo base_url('assets/plugins/geoPosition.js'); ?>"></script>

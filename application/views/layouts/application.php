@@ -25,22 +25,24 @@
                             <span class="icon-bar"></span>
                         </button><!--//nav-toggle-->
                     </div><!--//navbar-header-->
-                    <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
-                            <li class="nav-item nav-item-main-site last"><a href="<?php echo base_url('user/logout'); ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
-                        </ul><!--//nav-->
-                        
-                        <div class="searchbox-container">
-                            <form class="searchbox" id="search-form">
-                                <label class="sr-only" for="search-form">Search</label>
-                                <input id="search-form-input" class="form-control searchbox-input" placeholder="Search Kuklos..." type="search" value="" name="search">
-                                <input class="searchbox-submit" type="submit" value="GO">
-                                <i class="fa fa-search searchbox-icon"></i>
-                            </form>
-                        </div><!--//searchbox-container--> 
-                        
-                    </div><!--//navabr-collapse-->
+                    <?php if ($page_name != 'rack-page'): ?>
+                        <div id="navbar-collapse" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
+                                <li class="nav-item nav-item-main-site last"><a href="<?php echo base_url('user/logout'); ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
+                            </ul><!--//nav-->
+                            
+                            <div class="searchbox-container">
+                                <form class="searchbox" id="search-form">
+                                    <label class="sr-only" for="search-form">Search</label>
+                                    <input id="search-form-input" class="form-control searchbox-input" placeholder="Search Kuklos..." type="search" value="" name="search">
+                                    <input class="searchbox-submit" type="submit" value="GO">
+                                    <i class="fa fa-search searchbox-icon"></i>
+                                </form>
+                            </div><!--//searchbox-container--> 
+                            
+                        </div><!--//navabr-collapse-->
+                    <?php endif ?>
                 </nav><!--//main-nav-->
             </div><!--//container-->
         </header><!--//header-->

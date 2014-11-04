@@ -71,7 +71,7 @@ class Home extends CI_Controller {
 		$this->load->library('googlemaps');
 
 		$config['geocodeCaching'] = TRUE;
-		$config['minifyJS'] = FALSE;
+		$config['minifyJS'] = TRUE;
 		if ($this->input->get('search') != '') {
 			$config['center'] = $this->input->get('search');
 			$config['zoom'] = '14';
