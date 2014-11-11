@@ -58,7 +58,7 @@
             <div class="container">
                <h2 class="title">Ready to evolve your biking experience?</h2>
                <p class="intro">More than <span class="counting">0</span> users are using Kuklos</p>
-               <p><a class="btn btn-cta btn-cta-primary" href="<?php echo base_url('user/signup'); ?>" target="_blank">Signup in under than 15 seconds</a></p>
+               <p><a class="btn btn-cta btn-cta-primary" href="<?php echo base_url('user/signup'); ?>" target="_blank">Signup in under 15 seconds</a></p>
             </div><!--//container-->
         </section><!--//cta-section-->
         

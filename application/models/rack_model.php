@@ -95,6 +95,18 @@ class Rack_Model extends CI_Model {
 	function get_all_racks() {
 		return $this->get_all_racks_query()->result_array();
 	}
+
+	/*
+	// Returns an array containing all favourite racks
+	function get_favourite_racks() {
+		$this->db->select(array('rack_id', 'address', 'lat', 'lon', 'rack_count'));
+		$where = "('favourite' == true)";
+		$this->db->from('racks')->where($where);
+		$query = $this->db->get();
+
+		return $query;
+	}
+	*/
 	
 	  /////////////////////////////
 	 // RACK SPECIFIC FUNCTIONS //

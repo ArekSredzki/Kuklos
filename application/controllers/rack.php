@@ -29,6 +29,12 @@ class Rack extends CI_Controller {
 		$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$data['rack_data']['address'].
 			"</span><br><span class=\"rack_count\">Number of racks: ".$data['rack_data']['rack_count']."</span></p>";
 
+		/*
+		if ($data['favourite'] == TRUE) {
+			$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
+		} else
+		*/
+
 		if ($data['rack_data']['rack_count'] == 1) {
 			$icon_url = base_url()."assets/images/noun_project/bike-rack-1.svg";
 		} else if ($data['rack_data']['rack_count'] == 2) {
