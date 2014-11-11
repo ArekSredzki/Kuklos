@@ -104,6 +104,12 @@ document.getElementById("search-form").submit();';
 			$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$rack['address'].
 				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span></p>";
 
+			/*
+			if ($data['favourite'] == TRUE) {
+				$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
+			} else
+			*/
+
 			if ($rack['rack_count'] == 1) {
 				$icon_url = base_url()."assets/images/noun_project/bike-rack-1.svg";
 			} else if ($rack['rack_count'] == 2) {
