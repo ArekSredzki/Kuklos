@@ -129,6 +129,25 @@ class Rack_Model extends CI_Model {
 			);
 		}
 	}
+	
+	// Get comments for a specific rack
+	function get_comments($rack_id) {		
+		$query = $this->db->get_where('comments', array('rack_id' => $rack_id));
+		return $query->result_array();
+	}
+	
+	// Add a comment for a specific rack
+	function add_comment($rack_id) {
+		$date = date_format(date_create(), 'U = Y-m-d H:i:s');
+		
+		$data = array(
+			'email' => '' // Need to properly retrieve email for this
+			'rack_id' => $rack_id,
+			'timestamp' => $date,
+			'text' => $this->input->post('text')
+		);
+		return $this->db->insert('comments', $data);
+	}
 
 		//*****************************//
 	   //                             //

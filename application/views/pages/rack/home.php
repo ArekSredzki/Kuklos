@@ -12,7 +12,21 @@
                                 </div><!--//gmap-wrapper-->
                                 <br>
 
-                                <p>Info Here</p>
+                                <p>
+																<?php foreach ($comments as $comments_item): ?>
+																		<div class="main">
+																				<i><?php echo $comments_item['timestamp'] ?></i> <br>
+																				<?php echo $comments_item['text'] ?> <br><br>
+																		</div>
+																<?php endforeach ?>
+
+																<h2>Leave a comment</h2>
+																<?php echo validation_errors(); ?>
+																<?php echo form_open('rack/home') ?>
+																	<textarea name="text"></textarea> <br>
+																	<input type="submit" name="submit" value="Submit"/>
+																</form>
+																</p>
 
                             </div><!--//blog-entry-content-->
                         </div><!--//row-->

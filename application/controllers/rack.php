@@ -54,6 +54,19 @@ class Rack extends CI_Controller {
 
 
 		$data['page_name'] = "rack-page";
+		
+		// Show and allow adding comments
+		$data['comments'] = $this->rack_model->get_comments($rack_id);
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('text', 'text', 'required');
+
+		if ($this->form_validation->run() === TRUE) {
+			$this->rack_model->add_comment($rack_id);
+		}
+		
 		$this->template
 			->title('Rack Not Found', 'Kuklos')
 			->build('pages/rack/home', $data);
