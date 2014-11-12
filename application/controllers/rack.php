@@ -26,8 +26,9 @@ class Rack extends CI_Controller {
 
 		$marker['position'] = $data['rack_data']['lat'].', '.$data['rack_data']['lon'];
 		$marker['title'] = $data['rack_data']['address'];
+		$rack_url = base_url()."rack/".$data['rack_data']['rack_id'];
 		$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$data['rack_data']['address'].
-			"</span><br><span class=\"rack_count\">Number of racks: ".$data['rack_data']['rack_count']."</span></p>";
+			"</span><br><span class=\"rack_count\">Number of racks: ".$data['rack_data']['rack_count']."</span><br><a href=".$rack_url.">Click for details</a></p>";
 
 		/*
 		if ($data['favourite'] == TRUE) {
@@ -65,10 +66,11 @@ class Rack extends CI_Controller {
 
 		if ($this->form_validation->run() === TRUE) {
 			$this->rack_model->add_comment($rack_id);
+			redirect('rack/'.$rack_id.'');
 		}
 		
 		$this->template
-			->title('Rack Not Found', 'Kuklos')
+			->title('Rack - '.$data['rack_data']['address'].'', 'Kuklos')
 			->build('pages/rack/home', $data);
 	}
 

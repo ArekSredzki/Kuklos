@@ -101,8 +101,9 @@ document.getElementById("search-form").submit();';
 
 			$marker['position'] = $rack['lat'].', '.$rack['lon'];
 			$marker['title'] = $rack['address'];
+			$rack_url = base_url()."rack/".$rack['rack_id'];
 			$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$rack['address'].
-				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span></p>";
+				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span><br><a href=".$rack_url.">Click for details</a></p>";
 
 			/*
 			if ($data['favourite'] == TRUE) {

@@ -138,12 +138,10 @@ class Rack_Model extends CI_Model {
 	
 	// Add a comment for a specific rack
 	function add_comment($rack_id) {
-		$date = date_format(date_create(), 'U = Y-m-d H:i:s');
-		
 		$data = array(
-			'email' => '' // Need to properly retrieve email for this
+			'email' => $this->session->userdata('email'),
 			'rack_id' => $rack_id,
-			'timestamp' => $date,
+			'timestamp' => time(),
 			'text' => $this->input->post('text')
 		);
 		return $this->db->insert('comments', $data);

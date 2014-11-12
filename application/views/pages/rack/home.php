@@ -13,16 +13,18 @@
                                 <br>
 
                                 <p>
+																<h2>Comments</h2>
 																<?php foreach ($comments as $comments_item): ?>
 																		<div class="main">
-																				<i><?php echo $comments_item['timestamp'] ?></i> <br>
-																				<?php echo $comments_item['text'] ?> <br><br>
+																				<b><?php echo $comments_item['email'] ?></b> <br>
+																				<?php echo $comments_item['text'] ?> <br>
+																				<font size="2"><?php echo date("F d, Y - h:ia", $comments_item['timestamp']) ?></font> <br><br>
 																		</div>
 																<?php endforeach ?>
 
 																<h2>Leave a comment</h2>
 																<?php echo validation_errors(); ?>
-																<?php echo form_open('rack/home') ?>
+																<?php echo form_open('rack/'.$rack_data['rack_id'].'') ?>
 																	<textarea name="text"></textarea> <br>
 																	<input type="submit" name="submit" value="Submit"/>
 																</form>
