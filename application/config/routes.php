@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "home";
 $route['switch_view'] = "user/switch_view";
-$route['rack/(:any)'] = "rack/display/$1";
+$route['rack/(:num)'] = "rack/display/$1";
 
 $route['404_override'] = 'error';
 

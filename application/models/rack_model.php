@@ -131,7 +131,8 @@ class Rack_Model extends CI_Model {
 	}
 	
 	// Get comments for a specific rack
-	function get_comments($rack_id) {		
+	function get_comments($rack_id) {
+		$this->db->order_by("timestamp", "desc");
 		$query = $this->db->get_where('comments', array('rack_id' => $rack_id));
 		return $query->result_array();
 	}
