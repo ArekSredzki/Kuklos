@@ -22,7 +22,7 @@
 
                                 <h4>Favourite this bike rack!</h4>
                                 <!--//favourite&unfavourite php functions-->
-                                <div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>
+                                <!--<div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>-->
                                 <br>
 <!--                                  TODO: fix this 
                                 <p>

@@ -18,6 +18,20 @@
                                         </span>
                                     </div><!-- /input-group -->
                                 </form>
+                                <br>
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="backups" data-toggle="dropdown" aria-expanded="true">
+                                        Backups
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="backups">
+                                        <li role="presentation" class="dropdown-header">Available Backups</li>
+                                        <?php foreach ($backups as $backup): ?>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url('admin/restore_backup/'.$backup); ?>"><?php echo $backup; ?></a></li>
+                                        <?php endforeach ?>
+                                    </ul>
+                                    <a class="btn btn-default" type="button"  href="<?php echo base_url('admin/save_backup/'); ?>">Backup Current Database</a>
+                                </div>
                             </div><!--//blog-entry-content-->
                         </div><!--//row-->
                     </div><!--//container-->                                               
