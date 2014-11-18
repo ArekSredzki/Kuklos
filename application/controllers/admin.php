@@ -15,10 +15,67 @@ class Admin extends CI_Controller {
 	}
 
 	public function index() {
+		// Load the file helper 
+		$this->load->helper('file');
+		$data['backups'] = get_filenames('/var/backups/kuklos/');
+
 		$data['page_name'] = "admin-page";
 		$this->template
 			->title('Home', 'Admin', 'Kuklos')
 			->build('pages/admin/home', $data);
+	}
+
+	public function save_backup() {
+		// Load the file helper 
+		$this->load->helper('file');
+
+
+		// Load the DB utility class
+		$this->load->dbutil();
+
+		// Backup your entire database and assign it to a variable
+
+		$number_of_backups = count(get_filenames('/var/backups/kuklos/'));
+		$prefs = array(
+            'format'      => 'txt',             // gzip, zip, txt
+            'add_drop'    => FALSE,              // Whether to add DROP TABLE statements to backup file
+            'add_insert'  => TRUE,              // Whether to add INSERT data to backup file
+            'newline'     => "\n"               // Newline character used in backup file
+          );
+
+		$backup =& $this->dbutil->backup($prefs); 
+
+		// write the file to your server
+		write_file('/var/backups/kuklos/backup_'.$number_of_backups.'.sql', $backup);
+
+		// Load the download helper and send the file to your desktop
+		// $this->load->helper('download');
+		// force_download('mybackup.gz', $backup);
+
+		redirect(base_url('admin'));
+	}
+
+	public function restore_backup() {
+		// Load the file helper 
+		$this->load->helper('file');
+
+		if (!read_file('/var/backups/kuklos/')) {
+			//FAILURE File Doesn't exist
+			redirect(base_url('admin'));
+		}
+
+		// Load the DB utility class
+		$this->load->dbutil();
+
+		// Backup your entire database and assign it to a variable
+		$backup =& $this->dbutil->backup(); 
+
+		// write the file to your server
+		write_file('/var/backups/kuklos/mybackup.gz', $backup);
+
+		// Load the download helper and send the file to your desktop
+		$this->load->helper('download');
+		force_download('mybackup.gz', $backup);
 	}
 
 	public function load_xls() {
