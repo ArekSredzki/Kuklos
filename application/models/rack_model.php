@@ -188,6 +188,57 @@ class Rack_Model extends CI_Model {
 	}
 	*/
 
+
+
+	/*
+	// The ratings sql. TODO: Delete this comment
+// 	CREATE TABLE `ratings` (
+//   `rack_id` varchar(11) NOT NULL DEFAULT '',
+//   `email` varchar(50) DEFAULT NULL,
+//   `value` tinyint(1) DEFAULT NULL,
+//   KEY `rack_id` (`rack_id`)
+// ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+	//Thumbs up on a specific rack
+	function thumbs_up($rack_id) {
+		$data = array(
+			'rack_id' => $rack_id,
+			'email' => $this->session->userdata('email'),
+			'value' => 1
+		);
+	}
+
+	//Thumbs down on a specific rack
+	function thumbs_down($rack_id) {
+			$data = array(
+			'rack_id' => $rack_id,
+			'email' => $this->session->userdata('email'),
+			'value' => 0
+		);
+	}
+
+	//gets all value = 1 and subtracts value = 0
+	function get_rating($rack_id) {
+		$this->db->select('value');
+		$this->db->where('reack_id', $rack_id);
+		$this->db->where('value', 1);
+		$this->db->select_sum('value');
+		$up = $this->db->get('ratings');
+
+
+
+		$this->db->select('value');
+		$this->db->where('reack_id', $rack_id);
+		$this->db->where('value', 0);
+		$this->db->select_sum('value');
+		$down = $this->db->get('ratings');
+
+		$sum = $up - $down;
+		return $sum;
+	}
+
+	*/
+
 		//*****************************//
 	   //                             //
 	  //       CHECK FUNCTIONS       //
