@@ -20,6 +20,11 @@
                                 </div><!--//gmap-wrapper-->
                                 <br>
 
+                                <h4>Favourite this bike rack!</h4>
+                                <!--//favourite&unfavourite php functions-->
+                                <div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>
+                                <br>
+
                                 <p>
 																<h2>Leave a comment THIS IS A TEST</h2>
 																<h3> Thumbs Up </h3> <h2>   |   </h2> <h3> Thumbs Down </h3>
