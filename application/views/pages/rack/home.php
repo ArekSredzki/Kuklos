@@ -5,7 +5,7 @@
                         <div class="row">
                             <div class="blog-entry-content col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
 
-                                <h3 class="section-heading">Rack - <?php echo $rack_data['address']; ?> <small><a href="<?php echo base_url(); ?>">Go Home</a></small></h3>
+                                <h3 class="section-heading">Rack - <?php echo $rack_data['address']; ?> <small><a href="<?php echo base_url(); ?>">Go Home THIS IS A TEST</a></small></h3>
 																<div id="fb-root"></div>
 																<script>(function(d, s, id) {
 																	var js, fjs = d.getElementsByTagName(s)[0];
@@ -20,8 +20,14 @@
                                 </div><!--//gmap-wrapper-->
                                 <br>
 
+                                <h4>Favourite this bike rack!</h4>
+                                <!--//favourite&unfavourite php functions-->
+                                <div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>
+                                <br>
+
                                 <p>
-																<h2>Leave a comment</h2>
+																<h2>Leave a comment THIS IS A TEST</h2>
+																<h3> Thumbs Up </h3> <h2>   |   </h2> <h3> Thumbs Down </h3>
 																<?php echo validation_errors(); ?>
 																<?php echo form_open('rack/'.$rack_data['rack_id'].'') ?>
 																	<textarea name="text" rows="5" cols="50"></textarea> <br>

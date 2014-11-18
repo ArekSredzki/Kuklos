@@ -21,6 +21,7 @@ class Rack_Model extends CI_Model {
 			'lat' => $lat,
 			'lon' => $lon,
 			'rack_count' => $rack_count
+			//,'favourite' => false
 		);
 
 		return ($this->db->insert('racks', $data));
@@ -40,6 +41,7 @@ class Rack_Model extends CI_Model {
 			'lat' => $lat,
 			'lon' => $lon,
 			'rack_count' => $rack_count
+			//,'favourite' => $favourite
 		);
 
 		$this->db->where('rack_id', $rack_id);
@@ -147,6 +149,44 @@ class Rack_Model extends CI_Model {
 		);
 		return $this->db->insert('comments', $data);
 	}
+
+	/*
+	// Favourite a bike rack
+	function favourite_rack($rack_id) {
+		$this->db->where('rack_id', $rack_id);
+		$row = $this->db->get('racks');
+
+		if ($row) {
+			$row = $row->row();
+			return array(
+				'rack_id' => $row->rack_id,
+				'address' => $row->address,
+				'lat' => $row->lat,
+				'lon' => $row->lon,
+				'rack_count' => $row->rack_count,
+				'favourite' => true
+			);
+		}
+	}
+
+	// Unfavourite a bike rack
+	function unfavourite_rack($rack_id) {
+		$this->db->where('rack_id', $rack_id);
+		$row = $this->db->get('racks');
+
+		if ($row) {
+			$row = $row->row();
+			return array(
+				'rack_id' => $row->rack_id,
+				'address' => $row->address,
+				'lat' => $row->lat,
+				'lon' => $row->lon,
+				'rack_count' => $row->rack_count,
+				'favourite' => false
+			);
+		}
+	}
+	*/
 
 		//*****************************//
 	   //                             //

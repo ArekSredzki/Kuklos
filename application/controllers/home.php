@@ -106,7 +106,7 @@ document.getElementById("search-form").submit();';
 				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span><br><a href=".$rack_url.">Click for details</a></p>";
 
 			/*
-			if ($data['favourite'] == TRUE) {
+			if ($rack['favourite'] == TRUE) {
 				$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
 			} else
 			*/
