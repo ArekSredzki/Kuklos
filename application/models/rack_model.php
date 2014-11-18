@@ -21,7 +21,6 @@ class Rack_Model extends CI_Model {
 			'lat' => $lat,
 			'lon' => $lon,
 			'rack_count' => $rack_count
-			//,'favourite' => false
 		);
 
 		return ($this->db->insert('racks', $data));
@@ -97,18 +96,6 @@ class Rack_Model extends CI_Model {
 	function get_all_racks() {
 		return $this->get_all_racks_query()->result_array();
 	}
-
-	/*
-	// Returns an array containing all favourite racks
-	function get_favourite_racks() {
-		$this->db->select(array('rack_id', 'address', 'lat', 'lon', 'rack_count'));
-		$where = "('favourite' == true)";
-		$this->db->from('racks')->where($where);
-		$query = $this->db->get();
-
-		return $query;
-	}
-	*/
 	
 	  /////////////////////////////
 	 // RACK SPECIFIC FUNCTIONS //
@@ -166,6 +153,19 @@ class Rack_Model extends CI_Model {
 			'email' => $this->session->userdata('email')
 		);
 		return $this->db->delete('favourites', $data);
+	}
+
+	function get_fav_info($rack_id) {
+		$this->db->where('rack_id', $rack_id);
+		$row = $this->db->get('favourites');
+
+		if ($row) {
+			$row = $row->row();
+			return array(
+				'rack_id' => $row->rack_id,
+				'email' => $row->email
+			);
+		}
 	}
 
 

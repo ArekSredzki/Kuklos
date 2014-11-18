@@ -106,7 +106,9 @@ document.getElementById("search-form").submit();';
 				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span><br><a href=".$rack_url.">Click for details</a></p>";
 
 			/*
-			if ($rack['favourite'] == TRUE) {
+			$fav = $this->rack_model->get_fav_info($rack['rack_id'])
+
+			if ($fav['email'] == $this->session->userdata('email')) {
 				$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
 			} else
 			*/

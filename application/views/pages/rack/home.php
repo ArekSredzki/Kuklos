@@ -20,10 +20,10 @@
                                 </div><!--//gmap-wrapper-->
                                 <br>
 
-                                <h4>Favourite this bike rack!</h4>
-                                <!--//favourite&unfavourite php functions-->
-                                <!--<div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>-->
-                                <br>
+                                <p>
+                                	<h4>Favourite this bike rack!</h4>
+                                	<!--//favourite&unfavourite php functions-->
+                               	</p>
 <!--                                  TODO: fix this 
                                 <p>
                                 	 <a href="<?php echo base_url("rack/".rack_data['id']."/thumbs_up"); ?>">Thumbs UP </a>
