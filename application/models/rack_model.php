@@ -201,11 +201,15 @@ class Rack_Model extends CI_Model {
 
 	//Thumbs up on a specific rack
 	function thumbs_up($rack_id) {
+		//nest inside an if statement
+
 		$data = array(
 			'rack_id' => $rack_id,
 			'email' => $this->session->userdata('email'),
 			'value' => 1
 		);
+
+		return $this->db->insert('comments', $data);
 	}
 
 	//Thumbs down on a specific rack
@@ -220,7 +224,7 @@ class Rack_Model extends CI_Model {
 	//gets all value = 1 and subtracts value = 0
 	function get_rating($rack_id) {
 		$this->db->select('value');
-		$this->db->where('reack_id', $rack_id);
+		$this->db->where('rack_id', $rack_id);
 		$this->db->where('value', 1);
 		$this->db->select_sum('value');
 		$up = $this->db->get('ratings');
@@ -228,8 +232,9 @@ class Rack_Model extends CI_Model {
 
 
 		$this->db->select('value');
-		$this->db->where('reack_id', $rack_id);
+		$this->db->where('rack_id', $rack_id);
 		$this->db->where('value', 0);
+		//get count instead
 		$this->db->select_sum('value');
 		$down = $this->db->get('ratings');
 
