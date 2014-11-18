@@ -22,7 +22,6 @@ class User_Model extends CI_Model {
 			'email' => $this->input->post('email'),
 			'password' => $this->hash_password($this->input->post('password')),
 			'timestamp' => now()
-			//,'fav_racks' => array()
 		);
 		
 		$query = $this->db->insert('users', $data);
@@ -65,16 +64,6 @@ class User_Model extends CI_Model {
 			return true;
 		}
 	}
-
-	/*
-	function favourite_rack($email) {
-		$this->db->insert();
-	}
-
-	function unfavourite_rack(&email) {
-		$this->db->delete();
-	}
-	*/
 
 		//*****************************//
 	   //                             //

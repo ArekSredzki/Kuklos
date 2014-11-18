@@ -31,7 +31,9 @@ class Rack extends CI_Controller {
 			"</span><br><span class=\"rack_count\">Number of racks: ".$data['rack_data']['rack_count']."</span></p>";
 
 		/*
-		if ($data['favourite'] == TRUE) {
+		$data['fav_data'] = $this->rack_model->get_fav_info($rack_id);
+
+		if ($data['fav_data']['email'] == $this->session->userdata('email')) {
 			$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
 		} else
 		*/
@@ -90,16 +92,34 @@ class Rack extends CI_Controller {
 
 	/*
 	public function thumbs_up() {
+		//Check if user is logged in
+
+
+		// Get rack_id
+		$rack_id = urldecode($this->uri->segment(2,-1));
+		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
+			redirect(base_url('rack/notfound'));
+
 		$this->rack_model->thumbs_up($rack_id);
+		//Redirect to previous page at the end
 	}
 
 	public function thumbs_down() {
+		//Check if user is logged in
+
+
+
+		// Get rack_id
+		$rack_id = urldecode($this->uri->segment(2,-1));
+		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
+			redirect(base_url('rack/notfound'));
+
 		$this->rack_model->thumbs_down($rack_id);
-	}
 
 
-	public function get_rating() {
-		return $this->rack_model->get_rating($rack_id);
+		
+		//Redirect to previous page at the end
+
 	}
 	*/
 }

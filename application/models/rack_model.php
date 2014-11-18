@@ -21,7 +21,6 @@ class Rack_Model extends CI_Model {
 			'lat' => $lat,
 			'lon' => $lon,
 			'rack_count' => $rack_count
-			//,'favourite' => false
 		);
 
 		return ($this->db->insert('racks', $data));
@@ -97,18 +96,6 @@ class Rack_Model extends CI_Model {
 	function get_all_racks() {
 		return $this->get_all_racks_query()->result_array();
 	}
-
-	/*
-	// Returns an array containing all favourite racks
-	function get_favourite_racks() {
-		$this->db->select(array('rack_id', 'address', 'lat', 'lon', 'rack_count'));
-		$where = "('favourite' == true)";
-		$this->db->from('racks')->where($where);
-		$query = $this->db->get();
-
-		return $query;
-	}
-	*/
 	
 	  /////////////////////////////
 	 // RACK SPECIFIC FUNCTIONS //
@@ -150,43 +137,36 @@ class Rack_Model extends CI_Model {
 		return $this->db->insert('comments', $data);
 	}
 
-	/*
 	// Favourite a bike rack
 	function favourite_rack($rack_id) {
-		$this->db->where('rack_id', $rack_id);
-		$row = $this->db->get('racks');
-
-		if ($row) {
-			$row = $row->row();
-			return array(
-				'rack_id' => $row->rack_id,
-				'address' => $row->address,
-				'lat' => $row->lat,
-				'lon' => $row->lon,
-				'rack_count' => $row->rack_count,
-				'favourite' => true
-			);
-		}
+		$data = array(
+			'rack_id' => $rack_id,
+			'email' => $this->session->userdata('email')
+		);
+		return $this->db->insert('favourites', $data);
 	}
 
 	// Unfavourite a bike rack
 	function unfavourite_rack($rack_id) {
+		$data = array(
+			'rack_id' => $rack_id,
+			'email' => $this->session->userdata('email')
+		);
+		return $this->db->delete('favourites', $data);
+	}
+
+	function get_fav_info($rack_id) {
 		$this->db->where('rack_id', $rack_id);
-		$row = $this->db->get('racks');
+		$row = $this->db->get('favourites');
 
 		if ($row) {
 			$row = $row->row();
 			return array(
 				'rack_id' => $row->rack_id,
-				'address' => $row->address,
-				'lat' => $row->lat,
-				'lon' => $row->lon,
-				'rack_count' => $row->rack_count,
-				'favourite' => false
+				'email' => $row->email
 			);
 		}
 	}
-	*/
 
 
 
@@ -201,11 +181,15 @@ class Rack_Model extends CI_Model {
 
 	//Thumbs up on a specific rack
 	function thumbs_up($rack_id) {
+		//nest inside an if statement
+
 		$data = array(
 			'rack_id' => $rack_id,
 			'email' => $this->session->userdata('email'),
 			'value' => 1
 		);
+
+		return $this->db->insert('comments', $data);
 	}
 
 	//Thumbs down on a specific rack
@@ -220,7 +204,7 @@ class Rack_Model extends CI_Model {
 	//gets all value = 1 and subtracts value = 0
 	function get_rating($rack_id) {
 		$this->db->select('value');
-		$this->db->where('reack_id', $rack_id);
+		$this->db->where('rack_id', $rack_id);
 		$this->db->where('value', 1);
 		$this->db->select_sum('value');
 		$up = $this->db->get('ratings');
@@ -228,8 +212,9 @@ class Rack_Model extends CI_Model {
 
 
 		$this->db->select('value');
-		$this->db->where('reack_id', $rack_id);
+		$this->db->where('rack_id', $rack_id);
 		$this->db->where('value', 0);
+		//get count instead
 		$this->db->select_sum('value');
 		$down = $this->db->get('ratings');
 
