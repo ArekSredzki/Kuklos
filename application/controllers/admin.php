@@ -59,6 +59,8 @@ class Admin extends CI_Controller {
 		// Load the file helper 
 		$this->load->helper('file');
 
+		$file_name = urldecode($this->uri->segment(2,-1));
+
 		if (!read_file('/var/backups/kuklos/')) {
 			//FAILURE File Doesn't exist
 			redirect(base_url('admin'));
@@ -67,6 +69,23 @@ class Admin extends CI_Controller {
 		// Load the download helper and send the file to your desktop
 		$this->load->helper('download');
 		force_download('mybackup.gz', $backup);
+
+		$backup = read_file('path/to/file.sql');
+                
+		$sql_clean = '';
+		foreach (explode("\n", $backup) as $line) {
+			if(isset($line[0]) && $line[0] != "#")
+				$sql_clean .= $line."\n";
+		}
+
+		//echo $sql_clean;
+
+		foreach (explode(";\n", $sql_clean) as $sql) {
+			$sql = trim($sql);
+			//echo  $sql.'<br/>============<br/>';
+			if ($sql)
+				$this->db->query($sql);
+		} 
 	}
 
 	public function load_xls() {

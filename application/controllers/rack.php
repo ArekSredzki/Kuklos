@@ -31,7 +31,9 @@ class Rack extends CI_Controller {
 			"</span><br><span class=\"rack_count\">Number of racks: ".$data['rack_data']['rack_count']."</span></p>";
 
 		/*
-		if ($data['favourite'] == TRUE) {
+		$data['fav_data'] = $this->rack_model->get_fav_info($rack_id);
+
+		if ($data['fav_data']['email'] == $this->session->userdata('email')) {
 			$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
 		} else
 		*/
