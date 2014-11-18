@@ -21,7 +21,7 @@
                                 <br>
 
                                 <p>
-																<h2>Leave a comment</h2>
+																<h2>Leave a comment THIS IS A TEST</h2>
 																<h3> Thumbs Up </h3> <h2>   |   </h2> <h3> Thumbs Down </h3>
 																<?php echo validation_errors(); ?>
 																<?php echo form_open('rack/'.$rack_data['rack_id'].'') ?>
