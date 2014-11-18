@@ -170,7 +170,7 @@ class Rack_Model extends CI_Model {
 
 
 
-	/*
+	
 	// The ratings sql. TODO: Delete this comment
 // 	CREATE TABLE `ratings` (
 //   `rack_id` varchar(11) NOT NULL DEFAULT '',
@@ -182,23 +182,39 @@ class Rack_Model extends CI_Model {
 	//Thumbs up on a specific rack
 	function thumbs_up($rack_id) {
 		//nest inside an if statement
+		if ($this->rating_exists($rack_id, $this->session->userdata('email'))) {
+			$user_id = $this->session->userdata('email');
+			$where = array('rack_id' => $rack_id, 'user_id' => $user_id);
+			$this->db->where($where);
+			$this->db->update('ratings', array('value', 1));
 
-		$data = array(
-			'rack_id' => $rack_id,
-			'email' => $this->session->userdata('email'),
-			'value' => 1
-		);
-
-		return $this->db->insert('comments', $data);
+		} else {
+			$data = array(
+				'rack_id' => $rack_id,
+				'email' => $this->session->userdata('email'),
+				'value' => 1
+			);
+			$this->db->insert('ratings', $data);
+		}
+		
 	}
 
 	//Thumbs down on a specific rack
 	function thumbs_down($rack_id) {
+		if ($this->rating_exists($rack_id, $this->session->userdata('email'))) {
+			$user_id = $this->session->userdata('email');
+			$where = array('rack_id' => $rack_id, 'user_id' => $user_id);
+			$this->db->where($where);
+			$this->db->update('ratings', array('value', 0));
+
+		} else {
 			$data = array(
-			'rack_id' => $rack_id,
-			'email' => $this->session->userdata('email'),
-			'value' => 0
-		);
+				'rack_id' => $rack_id,
+				'email' => $this->session->userdata('email'),
+				'value' => 0
+			);
+			$this->db->insert('ratings', $data);
+		}
 	}
 
 	//gets all value = 1 and subtracts value = 0
@@ -206,23 +222,28 @@ class Rack_Model extends CI_Model {
 		$this->db->select('value');
 		$this->db->where('rack_id', $rack_id);
 		$this->db->where('value', 1);
-		$this->db->select_sum('value');
-		$up = $this->db->get('ratings');
-
-
+		$up = $this->db->from('ratings')->count_all_results();
 
 		$this->db->select('value');
 		$this->db->where('rack_id', $rack_id);
 		$this->db->where('value', 0);
-		//get count instead
-		$this->db->select_sum('value');
-		$down = $this->db->get('ratings');
+		$down = $this->db->from('ratings')->count_all_results();
 
 		$sum = $up - $down;
 		return $sum;
 	}
 
-	*/
+
+	function rating_exists($rack_id, $user_id) {
+		$where = array('rack_id' => $rack_id, 'user_id' => $user_id);
+		$this->db->where($where);
+		if ($this->db->count_all_results('ratings') == 1)
+			return true;
+		else
+			return false;
+	}
+
+
 
 		//*****************************//
 	   //                             //

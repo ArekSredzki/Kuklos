@@ -60,7 +60,7 @@ class Rack extends CI_Controller {
 		$data['comments'] = $this->rack_model->get_comments($rack_id);
 
 		//TODO: uncomment if right. Just gets the rating for that rack
-		// $data['rating'] = $this->rack_model->get_rating($rack_id);
+		$data['rating'] = $this->rack_model->get_rating($rack_id);
 
 
 
@@ -88,7 +88,7 @@ class Rack extends CI_Controller {
 			->build('pages/rack/notfound', $data);
 	}
 
-	/*
+
 	public function thumbs_up() {
 		//Check if user is logged in
 
@@ -119,7 +119,7 @@ class Rack extends CI_Controller {
 		//Redirect to previous page at the end
 
 	}
-	*/
+
 }
 
 /* End of file rack.php */

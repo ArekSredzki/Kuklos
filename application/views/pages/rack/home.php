@@ -24,13 +24,13 @@
                                 <!--//favourite&unfavourite php functions-->
                                 <!--<div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>-->
                                 <br>
-<!--                                  TODO: fix this 
+
                                 <p>
-                                	 <a href="<?php echo base_url("rack/".rack_data['id']."/thumbs_up"); ?>">Thumbs UP </a>
-                                	 <a href="<?php echo base_url("rack/".rack_data['id']."/thumbs_down"); ?>">Thumbs DOWN </a>
+                                	 <a href="<?php echo base_url("rack/".$rack_data['rack_id']."/thumbs_up"); ?>">Thumbs UP </a>
+                                	 <a href="<?php echo base_url("rack/".$rack_data['rack_id']."/thumbs_down"); ?>">Thumbs DOWN </a>
                                 	 <h3> Rating: <h3> <?php echo $rating; ?>
 
-                                </p> -->
+                                </p>
                                
 
                                 <p>
