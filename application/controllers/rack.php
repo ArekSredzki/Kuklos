@@ -59,6 +59,13 @@ class Rack extends CI_Controller {
 		// Show and allow adding comments
 		$data['comments'] = $this->rack_model->get_comments($rack_id);
 
+		//TODO: uncomment if right. Just gets the rating for that rack
+		// $data['rating'] = $this->rack_model->get_rating($rack_id);
+
+
+
+
+
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
@@ -80,6 +87,21 @@ class Rack extends CI_Controller {
 			->title('Rack Not Found', 'Kuklos')
 			->build('pages/rack/notfound', $data);
 	}
+
+	/*
+	public function thumbs_up() {
+		$this->rack_model->thumbs_up($rack_id);
+	}
+
+	public function thumbs_down() {
+		$this->rack_model->thumbs_down($rack_id);
+	}
+
+
+	public function get_rating() {
+		return $this->rack_model->get_rating($rack_id);
+	}
+	*/
 }
 
 /* End of file rack.php */
