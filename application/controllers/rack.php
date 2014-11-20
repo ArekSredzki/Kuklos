@@ -9,12 +9,15 @@ class Rack extends CI_Controller {
 	}
 
 	public function display() {
+		$this->load->helper('inflector');
+
 		// Get rack_id
 		$rack_id = urldecode($this->uri->segment(2,-1));
 		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
 			redirect(base_url('rack/notfound'));
 
 		$data['rack_data'] = $this->rack_model->get_rack_info($rack_id);
+		$data['rack_data']['address'] = humanize($data['rack_data']['address']);
 
 		$this->load->library('googlemaps');
 		$config['minifyJS'] = TRUE;
@@ -54,8 +57,6 @@ class Rack extends CI_Controller {
 
 		$data['map'] = $this->googlemaps->create_map();
 
-
-
 		$data['page_name'] = "rack-page";
 		
 		// Show and allow adding comments
@@ -64,13 +65,10 @@ class Rack extends CI_Controller {
 		//TODO: uncomment if right. Just gets the rating for that rack
 		$data['rating'] = $this->rack_model->get_rating($rack_id);
 
-
-
-
-
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-
+		
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger fade in">', '<button type="button" class="close" data-dismiss="alert">&times;</button></div>'); 
 		$this->form_validation->set_rules('text', 'text', 'required');
 
 		if ($this->form_validation->run() === TRUE) {

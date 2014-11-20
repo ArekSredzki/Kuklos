@@ -30,6 +30,7 @@ class Home extends CI_Controller {
 
 	private function table_view() {
 		$this->load->library('table');
+		$this->load->helper('inflector');
 
 		$data = array();
 
@@ -54,13 +55,21 @@ class Home extends CI_Controller {
 		$tmpl = array ( 'table_open'  => '<table id="rack-table" class="table table-hover table-responsive">' );
 		$this->table->set_template($tmpl);
 
+		$rack_result = array();
+
 		if ($data['gotPosition']) {
 			$this->table->set_heading('Address', 'Distance (m)', '# of Racks');
-			$data['rack_table'] = $this->table->generate($this->rack_model->get_racks_by_distance_query($lat, $lon));
+			$rack_result = $this->rack_model->get_racks_by_distance($lat, $lon);
 		} else {
 			$this->table->set_heading('Address', '# of Racks');
-			$data['rack_table'] = $this->table->generate($this->rack_model->get_all_racks_basic_query());
+			$rack_result = $this->rack_model->get_all_racks_basic();
 		}
+
+		foreach ($rack_result as $key => $rack) {
+			$rack_result[$key]['address'] = humanize($rack['address']);
+		}
+
+		$data['rack_table'] = $this->table->generate($rack_result);
 		
 		$this->template->set('page_name', 'table-page');
 		$this->template->build('pages/table_view', $data);
@@ -69,9 +78,10 @@ class Home extends CI_Controller {
 	private function map_view() {
 		$data = array();
 		$this->load->library('googlemaps');
+		$this->load->helper('inflector');
 
 		$config['geocodeCaching'] = TRUE;
-		$config['minifyJS'] = TRUE;
+		$config['minifyJS'] = FALSE;
 		if ($this->input->get('search') != '') {
 			$config['center'] = $this->input->get('search');
 			$config['zoom'] = '14';
@@ -100,9 +110,9 @@ document.getElementById("search-form").submit();';
 			$marker = array();
 
 			$marker['position'] = $rack['lat'].', '.$rack['lon'];
-			$marker['title'] = $rack['address'];
+			$marker['title'] = humanize($rack['address']);
 			$rack_url = base_url()."rack/".$rack['rack_id'];
-			$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$rack['address'].
+			$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".humanize($rack['address']).
 				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span><br><a href=".$rack_url.">Click for details</a></p>";
 
 			/*
@@ -127,8 +137,6 @@ document.getElementById("search-form").submit();';
 
 			$this->googlemaps->add_marker($marker);
 		}
-
-
 
 		$data['map'] = $this->googlemaps->create_map();
 

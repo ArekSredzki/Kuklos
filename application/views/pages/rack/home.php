@@ -20,41 +20,38 @@
                                 </div><!--//gmap-wrapper-->
                                 <br>
 
-
-
-
                                 <p>
-                                	<h4>Favourite this bike rack!</h4>
+                                	<h3>Favourite this bike rack!</h3>
                                 	<!--//favourite&unfavourite php functions-->
                                	</p>
 
                                 <p>
-                                	 <a href="<?php echo base_url("rack/".$rack_data['rack_id']."/thumbs_up"); ?>">Thumbs UP </a>
-                                	 <a href="<?php echo base_url("rack/".$rack_data['rack_id']."/thumbs_down"); ?>">Thumbs DOWN </a>
-                                	 <h3> Rating: <h3> <?php echo $rating; ?>
-
+                                	 <a href="<?php echo base_url("rack/".$rack_data['rack_id']."/thumbs_up"); ?>"><i class="fa fa-thumbs-up"></i></a>
+                                	 <a href="<?php echo base_url("rack/".$rack_data['rack_id']."/thumbs_down"); ?>"><i class="fa fa-thumbs-down"></i></a>
+                                	 <h3>Rating: <span class="highlight"><?php echo $rating; ?></span></h3>
                                 </p>
-                               
 
                                 <p>
-																<h2>Leave a comment</h2>
-																<?php echo validation_errors(); ?>
-																<?php echo form_open('rack/'.$rack_data['rack_id'].'') ?>
-																	<textarea name="text" rows="5" cols="50"></textarea> <br>
-																	<input type="submit" name="submit" value="Submit"/>
-																</form>
-																<br>
-																
-																<?php foreach ($comments as $comments_item): ?>
-																		<div class="main" id="<?php echo $comments_item['comment_id'] ?>">
-																				<b><?php echo $comments_item['email'] ?></b> <br>
-																				<?php echo $comments_item['text'] ?> <br>
-																				<font size="2"><?php echo date("F d, Y - h:ia", $comments_item['timestamp']) ?></font>
-																				<?php $rack_url = base_url()."rack/".$rack_data['rack_id']."#".$comments_item['comment_id']; ?>
-																				<div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>
-																		</div> <br>
-																<?php endforeach ?>							
-																</p>
+									<h3>Leave a comment</h3>
+									<?php echo validation_errors(); ?>
+									<?php echo form_open('rack/'.$rack_data['rack_id'].'') ?>
+										<div class="form-group">
+											<textarea class="form-control" name="text" rows="5" cols="50" placeholder="Comment..."></textarea>
+										</div>
+										<input class="btn btn-primary" type="submit" name="submit" value="Submit"/>
+									</form>
+									<br>
+									
+									<?php foreach ($comments as $comments_item): ?>
+										<div class="main" id="<?php echo $comments_item['comment_id'] ?>">
+											<b><?php echo $comments_item['email'] ?></b> <br>
+											<?php echo $comments_item['text'] ?> <br>
+											<span style="font-size: .75em;" class="highlight"><?php echo date("F d, Y - h:ia", $comments_item['timestamp']) ?></span>
+											<?php $rack_url = base_url()."rack/".$rack_data['rack_id']."#".$comments_item['comment_id']; ?>
+											<div class="fb-share-button" data-href="<?php echo $rack_url; ?>" data-layout="icon_link"></div>
+										</div> <br>
+									<?php endforeach ?>							
+								</p>
                             </div><!--//blog-entry-content-->
                         </div><!--//row-->
                     </div><!--//container-->                                               
