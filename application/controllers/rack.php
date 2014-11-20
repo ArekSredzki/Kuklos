@@ -100,26 +100,22 @@ class Rack extends CI_Controller {
 		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
 			redirect(base_url('rack/notfound'));
 
-		$this->rack_model->thumbs_up($rack_id);
-		//Redirect to previous page at the end
+		$this->rack_model->thumbs_up($rack_id, $this->session->userdata('email'));
+
+		redirect($_SERVER['HTTP_REFERER']); 
 	}
 
 	public function thumbs_down() {
 		//Check if user is logged in
-
-
 
 		// Get rack_id
 		$rack_id = urldecode($this->uri->segment(2,-1));
 		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
 			redirect(base_url('rack/notfound'));
 
-		$this->rack_model->thumbs_down($rack_id);
+		$this->rack_model->thumbs_down($rack_id, $this->session->userdata('email'));
 
-
-		
-		//Redirect to previous page at the end
-
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 }

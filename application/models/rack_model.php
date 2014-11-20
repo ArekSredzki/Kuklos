@@ -168,49 +168,34 @@ class Rack_Model extends CI_Model {
 		}
 	}
 
-
-
-	
-	// The ratings sql. TODO: Delete this comment
-// 	CREATE TABLE `ratings` (
-//   `rack_id` varchar(11) NOT NULL DEFAULT '',
-//   `email` varchar(50) DEFAULT NULL,
-//   `value` tinyint(1) DEFAULT NULL,
-//   KEY `rack_id` (`rack_id`)
-// ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 	//Thumbs up on a specific rack
-	function thumbs_up($rack_id) {
+	function thumbs_up($rack_id, $email) {
 		//nest inside an if statement
-		if ($this->rating_exists($rack_id, $this->session->userdata('email'))) {
-			$user_id = $this->session->userdata('email');
-			$where = array('rack_id' => $rack_id, 'user_id' => $user_id);
+		if ($this->rating_exists($rack_id, $email)) {
+			$where = array('rack_id' => $rack_id, 'email' => $email);
 			$this->db->where($where);
-			$this->db->update('ratings', array('value', 1));
-
+			$this->db->update('ratings', array('value' => 1));
 		} else {
 			$data = array(
 				'rack_id' => $rack_id,
-				'email' => $this->session->userdata('email'),
+				'email' => $email,
 				'value' => 1
 			);
 			$this->db->insert('ratings', $data);
 		}
-		
 	}
 
 	//Thumbs down on a specific rack
-	function thumbs_down($rack_id) {
-		if ($this->rating_exists($rack_id, $this->session->userdata('email'))) {
-			$user_id = $this->session->userdata('email');
-			$where = array('rack_id' => $rack_id, 'user_id' => $user_id);
+	function thumbs_down($rack_id, $email) {
+		//nest inside an if statement
+		if ($this->rating_exists($rack_id, $email)) {
+			$where = array('rack_id' => $rack_id, 'email' => $email);
 			$this->db->where($where);
-			$this->db->update('ratings', array('value', 0));
-
+			$this->db->update('ratings', array('value' => 0));
 		} else {
 			$data = array(
 				'rack_id' => $rack_id,
-				'email' => $this->session->userdata('email'),
+				'email' => $email,
 				'value' => 0
 			);
 			$this->db->insert('ratings', $data);
@@ -233,17 +218,11 @@ class Rack_Model extends CI_Model {
 		return $sum;
 	}
 
-
-	function rating_exists($rack_id, $user_id) {
-		$where = array('rack_id' => $rack_id, 'user_id' => $user_id);
-		$this->db->where($where);
-		if ($this->db->count_all_results('ratings') == 1)
-			return true;
-		else
-			return false;
+	function rating_exists($rack_id, $email) {
+		$where = array('rack_id' => $rack_id, 'email' => $email);
+		$this->db->where($where)->from('ratings');
+		return $this->db->count_all_results() == 1;
 	}
-
-
 
 		//*****************************//
 	   //                             //
@@ -254,10 +233,7 @@ class Rack_Model extends CI_Model {
 	// Check if valid rack
 	function rack_check($rack_id) {
 		$this->db->where('rack_id', $rack_id)->from('racks');
-		if ($this->db->count_all_results() == 1)
-			return true;
-		else
-			return false;
+		return $this->db->count_all_results() == 1;
 	}
 
 		//*****************************//

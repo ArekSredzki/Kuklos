@@ -153,10 +153,7 @@ class User_Model extends CI_Model {
 	// Check if valid user
 	function user_check($email) {
 		$this->db->where('email', $email)->from('users');
-		if ($this->db->count_all_results() == 1)
-			return true;
-		else
-			return false;
+		return $this->db->count_all_results() == 1;
 	}
 
 	// Check if user is logged in
