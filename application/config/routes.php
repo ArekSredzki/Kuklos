@@ -42,6 +42,7 @@ $route['default_controller'] = "home";
 $route['switch_view'] = "user/switch_view";
 $route['rack/(:num)/thumbs_up'] = "rack/thumbs_up/$1";
 $route['rack/(:num)/thumbs_down'] = "rack/thumbs_down/$1";
+$route['rack/(:num)/favourite_rack'] = "rack/favourite_rack/$1";
 $route['rack/(:num)'] = "rack/display/$1";
 $route['admin/restore_backup/(:num)'] = "admin/restore_backup/$1";
 

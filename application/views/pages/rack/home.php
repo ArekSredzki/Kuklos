@@ -22,7 +22,13 @@
 
                                 <p>
                                 	<h3>Favourite this bike rack!</h3>
-                                	<!--//favourite&unfavourite php functions-->
+                                	<a href="<?php echo base_url("rack/".$rack_data['rack_id']."/favourite_rack"); ?>">
+                                        <?php if($this->rack_model->is_favourited($rack_data['rack_id'], $this->session->userdata('email'))) : ?>
+                                			<i class="fa fa-star"></i>
+                                		<?php else : ?>
+                                			<i class="fa fa-star-o"></i>
+                                		<?php endif; ?>
+                                	</a>
                                	</p>
 
                                 <p>

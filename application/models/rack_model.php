@@ -151,6 +151,7 @@ class Rack_Model extends CI_Model {
 		return $this->db->delete('favourites', $data);
 	}
 
+	/*
 	function get_fav_info($rack_id) {
 		$this->db->where('rack_id', $rack_id);
 		$row = $this->db->get('favourites');
@@ -162,6 +163,21 @@ class Rack_Model extends CI_Model {
 				'email' => $row->email
 			);
 		}
+	}
+	*/
+
+	// Check if a rack has been favourited by the user
+	function is_favourited($rack_id, $email) {
+		$where = array('rack_id' => $rack_id, 'email' => $email);
+		$this->db->where($where);
+		$row = $this->db->get('favourites');
+
+		if  ($row) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 	//Thumbs up on a specific rack

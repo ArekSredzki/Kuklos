@@ -33,15 +33,14 @@ class Rack extends CI_Controller {
 		$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$data['rack_data']['address'].
 			"</span><br><span class=\"rack_count\">Number of racks: ".$data['rack_data']['rack_count']."</span></p>";
 
-		/*
-		$data['fav_data'] = $this->rack_model->get_fav_info($rack_id);
+		//$data['fav_data'] = $this->rack_model->get_fav_info($rack_id);
 
-		if ($data['fav_data']['email'] == $this->session->userdata('email')) {
+		//if ($data['fav_data']['email'] == $this->session->userdata('email')) {
+		if ($this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
 			$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
-		} else
-		*/
+		}
 
-		if ($data['rack_data']['rack_count'] == 1) {
+		else if ($data['rack_data']['rack_count'] == 1) {
 			$icon_url = base_url()."assets/images/noun_project/bike-rack-1.svg";
 		} else if ($data['rack_data']['rack_count'] == 2) {
 			$icon_url = base_url()."assets/images/noun_project/bike-rack-2.svg";
@@ -88,6 +87,31 @@ class Rack extends CI_Controller {
 			->build('pages/rack/notfound', $data);
 	}
 
+	public function favourite_rack() {
+		$rack_id = urldecode($this->uri->segment(2, -1));
+		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id))
+			redirect(base_url('rack/notfound'));
+
+		if ($this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
+			$this->rack_model->favourite_rack($rack_id);
+		} else {
+			$this->rack_model->unfavourite_rack($rack_id);
+		}
+
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+
+	/*
+	public function unfavourite_rack() {
+		$rack_id = urldecode($this->uri->segment(2, -1));
+		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id))
+			redirect(base_url('rack/notfound'));
+
+		$this->rack_model->unfavourite_rack($rack_id);
+
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+	*/
 
 	public function thumbs_up() {
 		//Check if user is logged in
