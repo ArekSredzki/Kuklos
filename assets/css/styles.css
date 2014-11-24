@@ -2922,10 +2922,6 @@ input[type="button"] {
 }
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
-    .why .item .desc {
-        margin-bottom: 60px;
-        text-align: center;
-    }
     #map_canvas {
         height: 450px;
     }
@@ -3153,10 +3149,6 @@ input[type="button"] {
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    .why .item .desc {
-        margin-bottom: 60px;
-        text-align: center;
-    }
     #map_canvas {
         height: 650px;
     }
@@ -3244,6 +3236,13 @@ input[type="button"] {
     }
     .access-page .navbar-collapse.collapse .navbar-nav {
         display: none;
+    }
+}
+/* Small devices only (992px and smaller) */
+@media (max-width: 991px) {
+    .why .item .desc {
+        margin-bottom: 60px;
+        text-align: center;
     }
 }
 /* Medium devices (desktops, 992px and up) */

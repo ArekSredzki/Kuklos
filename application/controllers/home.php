@@ -119,7 +119,7 @@ document.getElementById("search-form").submit();';
 			//$fav = $this->rack_model->get_fav_info($rack['rack_id'])
 
 			//if ($fav['email'] == $this->session->userdata('email')) {
-			if ($this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
+			if ($this->rack_model->is_favourited($rack['rack_id'], $this->session->userdata('email'))) {
 				$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
 			}
 
