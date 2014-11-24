@@ -28,7 +28,7 @@
                     <?php if ($page_name != 'rack-page'): ?>
                         <div id="navbar-collapse" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
-                                <?php if ($this->user_model->is_logged_in()): ?>
+                                <?php if ($this->user_model->is_admin()): ?>
                                     <li class="nav-item"><a href="<?php echo base_url('admin'); ?>">Admin</a></li>
                                 <?php endif ?>
                                 <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>

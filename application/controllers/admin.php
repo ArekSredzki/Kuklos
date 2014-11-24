@@ -29,13 +29,10 @@ class Admin extends CI_Controller {
 		// Load the file helper 
 		$this->load->helper('file');
 
-
 		// Load the DB utility class
 		$this->load->dbutil();
 
-		// Backup your entire database and assign it to a variable
-
-		$number_of_backups = count(get_filenames('/var/backups/kuklos/'));
+		// Backup the entire database and assign it to a variable
 		$prefs = array(
             'format'      => 'txt',             // gzip, zip, txt
             'add_drop'    => FALSE,              // Whether to add DROP TABLE statements to backup file
@@ -44,6 +41,9 @@ class Admin extends CI_Controller {
           );
 
 		$backup =& $this->dbutil->backup($prefs); 
+
+		// Get number of existing backups in order to properly name the new backup
+		$number_of_backups = count(get_filenames('/var/backups/kuklos/'));
 
 		// write the file to your server
 		write_file('/var/backups/kuklos/backup_'.$number_of_backups.'.sql', $backup);
@@ -59,19 +59,27 @@ class Admin extends CI_Controller {
 		// Load the file helper 
 		$this->load->helper('file');
 
-		$file_name = urldecode($this->uri->segment(2,-1));
+		$file_name = urldecode($this->uri->segment(3,-1));
+		$file_path = '/var/backups/kuklos/'.$file_name;
 
-		if (!read_file('/var/backups/kuklos/')) {
+		$backup = read_file($file_path);
+
+		if (!$backup) {
 			//FAILURE File Doesn't exist
+			print("Error: File does not exist ");
+			print($file_path);
 			redirect(base_url('admin'));
 		}
 
-		// Load the download helper and send the file to your desktop
-		$this->load->helper('download');
-		force_download('mybackup.gz', $backup);
-
-		$backup = read_file('path/to/file.sql');
-                
+		// Truncate all tables
+		$query = $this->db->query("SHOW TABLES");
+		$name = $this->db->database;
+		foreach ($query->result_array() as $row) {
+			$table = $row['Tables_in_' . $name];
+			$this->db->query("TRUNCATE " . $table);
+			$this->db->query("ALTER TABLE ".$table." AUTO_INCREMENT = 1");
+		}
+        
 		$sql_clean = '';
 		foreach (explode("\n", $backup) as $line) {
 			if(isset($line[0]) && $line[0] != "#")
@@ -85,7 +93,13 @@ class Admin extends CI_Controller {
 			//echo  $sql.'<br/>============<br/>';
 			if ($sql)
 				$this->db->query($sql);
-		} 
+		}
+
+		// Load the download helper and send the file to your desktop
+		// $this->load->helper('download');
+		// force_download('backup.sql', $backup);
+
+		redirect(base_url('admin'));
 	}
 
 	public function load_xls() {

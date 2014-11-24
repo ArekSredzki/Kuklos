@@ -170,7 +170,10 @@ class User_Model extends CI_Model {
 	}
 
 	// Check if user is admin
-	function is_admin($email) {
+	function is_admin($email = '') {
+		if ($email == '')
+			$email = $this->session->userdata('email');
+
 		$this->db->where('email', $email);
 		$query = $this->db->get('users');
 
