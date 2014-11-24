@@ -36,11 +36,11 @@ a.btn {
     -o-transition: all 0.4s ease-in-out;
     font-weight: bold;
 }
-.btn .fa,
+/*.btn .fa,
 a.btn .fa {
     color: #fff;
     margin-right: 5px;
-}
+}*/
 a.btn-cta,
 .btn-cta {
     padding: 8px 30px;

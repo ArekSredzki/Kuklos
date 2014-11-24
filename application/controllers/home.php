@@ -115,12 +115,11 @@ document.getElementById("search-form").submit();';
 			$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".humanize($rack['address']).
 				"</span><br><span class=\"rack_count\">Number of racks: ".$rack['rack_count']."</span><br><a href=".$rack_url.">Click for details</a></p>";
 
-			
 			//$fav = $this->rack_model->get_fav_info($rack['rack_id'])
 
 			//if ($fav['email'] == $this->session->userdata('email')) {
 			if ($this->rack_model->is_favourited($rack['rack_id'], $this->session->userdata('email'))) {
-				$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
+				$icon_url = base_url()."assets/images/noun_project/star.svg";
 			}
 
 			else if ($rack['rack_count'] == 1) {

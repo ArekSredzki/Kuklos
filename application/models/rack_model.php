@@ -169,15 +169,8 @@ class Rack_Model extends CI_Model {
 	// Check if a rack has been favourited by the user
 	function is_favourited($rack_id, $email) {
 		$where = array('rack_id' => $rack_id, 'email' => $email);
-		$this->db->where($where);
-		$row = $this->db->get('favourites');
-
-		if  ($row) {
-			return true;
-		} else {
-			return false;
-		}
-		
+		$this->db->where($where)->from('favourites');
+		return $this->db->count_all_results() == 1;
 	}
 
 	//Thumbs up on a specific rack

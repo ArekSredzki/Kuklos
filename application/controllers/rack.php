@@ -37,7 +37,7 @@ class Rack extends CI_Controller {
 
 		//if ($data['fav_data']['email'] == $this->session->userdata('email')) {
 		if ($this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
-			$icon_url = base_url()."assets/images/noun_project/yellow-star.svg";
+			$icon_url = base_url()."assets/images/noun_project/star.svg";
 		}
 
 		else if ($data['rack_data']['rack_count'] == 1) {
@@ -64,6 +64,8 @@ class Rack extends CI_Controller {
 		//TODO: uncomment if right. Just gets the rating for that rack
 		$data['rating'] = $this->rack_model->get_rating($rack_id);
 
+		$data['is_logged_in'] = $this->user_model->is_logged_in();
+
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
@@ -88,14 +90,19 @@ class Rack extends CI_Controller {
 	}
 
 	public function favourite_rack() {
+		//Check if user is logged in
+		if (!$this->user_model->is_logged_in())
+			redirect($_SERVER['HTTP_REFERER']);
+
+		// Get rack_id
 		$rack_id = urldecode($this->uri->segment(2, -1));
 		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id))
 			redirect(base_url('rack/notfound'));
 
 		if ($this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
-			$this->rack_model->favourite_rack($rack_id);
-		} else {
 			$this->rack_model->unfavourite_rack($rack_id);
+		} else {
+			$this->rack_model->favourite_rack($rack_id);
 		}
 
 		redirect($_SERVER['HTTP_REFERER']);
@@ -115,7 +122,8 @@ class Rack extends CI_Controller {
 
 	public function thumbs_up() {
 		//Check if user is logged in
-
+		if (!$this->user_model->is_logged_in())
+			redirect($_SERVER['HTTP_REFERER']);
 
 		// Get rack_id
 		$rack_id = urldecode($this->uri->segment(2,-1));
@@ -124,11 +132,13 @@ class Rack extends CI_Controller {
 
 		$this->rack_model->thumbs_up($rack_id, $this->session->userdata('email'));
 
-		redirect($_SERVER['HTTP_REFERER']); 
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	public function thumbs_down() {
 		//Check if user is logged in
+		if (!$this->user_model->is_logged_in())
+			redirect($_SERVER['HTTP_REFERER']);
 
 		// Get rack_id
 		$rack_id = urldecode($this->uri->segment(2,-1));
