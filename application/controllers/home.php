@@ -66,7 +66,10 @@ class Home extends CI_Controller {
 		}
 
 		foreach ($rack_result as $key => $rack) {
-			$rack_result[$key]['address'] = humanize($rack['address']);
+      $address = humanize($rack['address']);
+      $id = $this->rack_model->get_rack_id_from_address($address);
+      $rack_url = base_url()."rack/".$id;
+			$rack_result[$key]['address'] = '<a href='.$rack_url.'>'.$address.'</a>';
 		}
 
 		$data['rack_table'] = $this->table->generate($rack_result);

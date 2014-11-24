@@ -114,6 +114,16 @@ class Rack_Model extends CI_Model {
 			);
 		}
 	}
+  
+  // Get rack id from address
+  function get_rack_id_from_address($address) {
+    $this->db->where('address', $address);
+		$row = $this->db->get('racks');
+    if ($row) {
+			$row = $row->row();
+			return $row->rack_id;
+		}
+  }
 	
 	// Get comments for a specific rack
 	function get_comments($rack_id) {
