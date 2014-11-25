@@ -58,10 +58,10 @@ class Home extends CI_Controller {
 		$rack_result = array();
 
 		if ($data['gotPosition']) {
-			$this->table->set_heading('Address', 'Distance (m)', '# of Racks');
+			$this->table->set_heading('Address', 'Distance (m)', '# of Racks', 'Rating');
 			$rack_result = $this->rack_model->get_racks_by_distance($lat, $lon);
 		} else {
-			$this->table->set_heading('Address', '# of Racks');
+			$this->table->set_heading('Address', '# of Racks', 'Rating');
 			$rack_result = $this->rack_model->get_all_racks_basic();
 		}
 
@@ -70,6 +70,7 @@ class Home extends CI_Controller {
       $id = $this->rack_model->get_rack_id_from_address($address);
       $rack_url = base_url()."rack/".$id;
 			$rack_result[$key]['address'] = '<a href='.$rack_url.'>'.$address.'</a>';
+      $rack_result[$key]['rating'] = $this->rack_model->get_rating($id);
 		}
 
 		$data['rack_table'] = $this->table->generate($rack_result);
