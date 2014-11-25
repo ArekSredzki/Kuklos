@@ -18,6 +18,7 @@ class Admin extends My_Controller {
 		// Load the file helper 
 		$this->load->helper('file');
 		$data['backups'] = get_filenames('/var/backups/kuklos/');
+		sort($data['backups']);
 
 		$data['page_name'] = "admin-page";
 		$this->template
@@ -29,7 +30,21 @@ class Admin extends My_Controller {
 		// Load the file helper 
 		$this->load->helper('file');
 		$data['backups'] = get_filenames('/var/backups/kuklos/');
+		sort($data['backups']);
 		$data['restore_result'] = '<div class="alert alert-success fade in"><strong>Success!</strong>  The database has been restored<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+
+		$data['page_name'] = "admin-page";
+		$this->template
+			->title('Home', 'Admin', 'Kuklos')
+			->build('pages/admin/home', $data);
+	}
+
+	public function backup_success() {
+		// Load the file helper 
+		$this->load->helper('file');
+		$data['backups'] = get_filenames('/var/backups/kuklos/');
+		sort($data['backups']);
+		$data['restore_result'] = '<div class="alert alert-success fade in"><strong>Success!</strong>  The database has been backed up to disk<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
 
 		$data['page_name'] = "admin-page";
 		$this->template
@@ -64,7 +79,7 @@ class Admin extends My_Controller {
 		// $this->load->helper('download');
 		// force_download('mybackup.gz', $backup);
 
-		redirect(base_url('admin'));
+		redirect(base_url('admin/backup_success'));
 	}
 
 	public function restore_backup($file_name) {
