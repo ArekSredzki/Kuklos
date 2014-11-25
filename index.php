@@ -175,6 +175,8 @@ if (defined('ENVIRONMENT'))
 	// Name of the "system folder"
 	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
 
+	// Path to the vendor folder for Composer
+	define('VENDORPATH', FCPATH . 'vendor/');
 
 	// The path to the "application" folder
 	if (is_dir($application_folder))
@@ -199,6 +201,10 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+// init Composer bootstrap
+require_once VENDORPATH.'autoload.php';
+
+// init Codeigniter bootstrap
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */
