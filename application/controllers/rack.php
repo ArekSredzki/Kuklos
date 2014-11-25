@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Rack extends CI_Controller {
+class Rack extends My_Controller {
 
 	function __construct()
 	{

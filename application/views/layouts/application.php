@@ -29,7 +29,7 @@
                         <div id="navbar-collapse" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <?php if ($this->user_model->is_admin()): ?>
-                                    <li class="nav-item"><a href="<?php echo base_url('admin'); ?>">Admin</a></li>
+                                    <li class="active nav-item"><a href="<?php echo base_url('admin'); ?>">Admin</a></li>
                                 <?php endif ?>
                                 <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
                                 <li class="nav-item nav-item-main-site last"><a href="<?php echo base_url('user/logout'); ?>"><i class="fa fa-sign-out"></i> Logout</a></li>

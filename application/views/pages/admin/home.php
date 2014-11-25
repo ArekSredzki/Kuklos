@@ -11,7 +11,7 @@
 
                                 <form action="<?php echo base_url('admin/load_xls'); ?>" method="post">
                                     <div class="input-group">
-                                        <span class="input-group-addon">ftp://webftp.vancouver.ca</span>
+                                        <span class="input-group-addon">ftp://webftp.vancouver.ca/</span>
                                         <input type="text" class="form-control" placeholder="Path to XLS Rack file" name="url">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit">Process Rack XLS</button>
@@ -30,8 +30,16 @@
                                             <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url('admin/restore_backup/'.$backup); ?>"><?php echo $backup; ?></a></li>
                                         <?php endforeach ?>
                                     </ul>
-                                    <a class="btn btn-default" type="button"  href="<?php echo base_url('admin/save_backup/'); ?>">Backup Current Database</a>
+                                    <a class="btn btn-default" href="<?php echo base_url('admin/save_backup/'); ?>">Backup Current Database</a>
+                                    <?php
+                                    if (!empty($restore_result)) {
+                                        echo '<br><br>';
+                                        echo $restore_result;
+                                    }
+                                    ?>
                                 </div>
+                                <br>
+                                <a class="btn btn-primary" href="<?php echo base_url('test/Toast_all/'); ?>">Run Unit Tests</a>
                             </div><!--//blog-entry-content-->
                         </div><!--//row-->
                     </div><!--//container-->                                               

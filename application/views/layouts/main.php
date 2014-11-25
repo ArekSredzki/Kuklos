@@ -26,15 +26,21 @@
                 </div><!--//navbar-header-->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+
+                    <?php if ($page_name == 'about-page') : ?>
+                        <li class="nav-item"><a href="<?php echo base_url(); ?>">Home</a></li>
+                        <li class="active nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
+                    <?php else : ?>
                         <li class="active nav-item"><a href="<?php echo base_url(); ?>">Home</a></li>
                         <li class="nav-item"><a href="<?php echo base_url('about'); ?>">About Us</a></li>
-                    <?php if ($this->user_model->is_logged_in()) { ?>
+                    <?php endif ?>
+                    <?php if ($this->user_model->is_logged_in()) : ?>
                         <li class="nav-item"><a href="<?php echo base_url('user/logout'); ?>">Logout</a></li>
                         <?php if ($this->user_model->is_admin($this->session->userdata('email'))) echo '<li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="'.base_url('admin').'">Sign Up Free</a></li>'; ?>
-                    <?php } else { ?>
+                    <?php else : ?>
                         <li class="nav-item"><a href="<?php echo base_url('user/login'); ?>">Log in</a></li>
                         <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo base_url('user/signup'); ?>">Sign Up Free</a></li>
-                    <?php } ?>
+                    <?php endif ?>
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
             </nav><!--//main-nav-->                     

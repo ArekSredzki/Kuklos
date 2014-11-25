@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Admin extends My_Controller {
 
 	function __construct()
 	{
@@ -18,6 +18,18 @@ class Admin extends CI_Controller {
 		// Load the file helper 
 		$this->load->helper('file');
 		$data['backups'] = get_filenames('/var/backups/kuklos/');
+
+		$data['page_name'] = "admin-page";
+		$this->template
+			->title('Home', 'Admin', 'Kuklos')
+			->build('pages/admin/home', $data);
+	}
+
+	public function restore_success() {
+		// Load the file helper 
+		$this->load->helper('file');
+		$data['backups'] = get_filenames('/var/backups/kuklos/');
+		$data['restore_result'] = '<div class="alert alert-success fade in"><strong>Success!</strong>  The database has been restored<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
 
 		$data['page_name'] = "admin-page";
 		$this->template
@@ -98,21 +110,16 @@ class Admin extends CI_Controller {
 		// $this->load->helper('download');
 		// force_download('backup.sql', $backup);
 
-		redirect(base_url('admin'));
+		redirect(base_url('admin/restore_success'));
 	}
 
 	public function load_xls() {
-		$data['output'] = '';
+		$this->load->helper('parsing');
 
 		$file_path = (APPPATH . 'cache/temp.xls');
 		if (file_exists($file_path)) {
 			unlink($file_path);
 		}
-
-		// Load library for getting GPS Coordinates of racks
-		$this->load->library('googlemaps');
-		$config['geocodeCaching'] = TRUE;
-		$this->googlemaps->initialize($config);
 
 		// Get file from external server
 		$this->load->library('ftp');
@@ -124,45 +131,7 @@ class Admin extends CI_Controller {
 		$this->ftp->download($this->input->post('url'), $file_path);
 		$this->ftp->close();
 
-		// Load XLS Reader
-		include(APPPATH . 'libraries/SpreadsheetReader_XLS.php');
-		$Reader = new SpreadsheetReader_XLS($file_path);
-
-		$rows_to_skip = 6; // Number of blank header rows before data starts
-		$cols_to_skip = 0; // Number of blank columns before data starts
-
-		for ($i=0; $i < $rows_to_skip; $i++) { 
-			$Reader->next();
-		}
-
-		if ($Reader->current()[0] == '') {
-			$cols_to_skip = 1;
-		}
-		
-		while ($Reader->valid()) {
-			$row = $Reader->current();
-
-			if ($row[$cols_to_skip] == '') {
-				break; // End of data has been reached, break loop
-			}
-
-			if ($row[$cols_to_skip] != '' && $row[$cols_to_skip + 1] != '' && $row[$cols_to_skip + 5] != '') {
-				$address = $row[$cols_to_skip].' '.$row[$cols_to_skip + 1].', Vancouver, Canada';
-
-				$gmaps_result = $this->googlemaps->get_lat_long_from_address($address);
-				$lat = $gmaps_result[0];
-				$lon = $gmaps_result[1];
-
-				if (!$this->rack_model->create_rack($address, $lat, $lon, $row[$cols_to_skip + 5])) {
-					$data['output'] .= '<div class="alert alert-warning" role="alert">Rack at address: '.$address.' already exists</div>';
-				}
-				
-			} else {
-				$data['output'] .= '<div class="alert alert-danger" role="alert">Invalid entry at key: '.$Reader->key().'</div>';
-			}
-			$Reader->next();
-		}
-
+		$data['output'] = parse($file_path);
 
 		if ($data['output'] == '') {
 			$data['output'] = 'Successfully imported all racks.';
