@@ -33,9 +33,6 @@ class Rack extends CI_Controller {
 		$marker['infowindow_content'] = "<h4 class=\"title\">Bike Rack</h4><p><span class=\"region\">".$data['rack_data']['address'].
 			"</span><br><span class=\"rack_count\">Number of racks: ".$data['rack_data']['rack_count']."</span></p>";
 
-		//$data['fav_data'] = $this->rack_model->get_fav_info($rack_id);
-
-		//if ($data['fav_data']['email'] == $this->session->userdata('email')) {
 		if ($this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
 			$icon_url = base_url()."assets/images/noun_project/star.svg";
 		}
@@ -61,7 +58,7 @@ class Rack extends CI_Controller {
 		// Show and allow adding comments
 		$data['comments'] = $this->rack_model->get_comments($rack_id);
 
-		//TODO: uncomment if right. Just gets the rating for that rack
+		// Gets the rating for a rack
 		$data['rating'] = $this->rack_model->get_rating($rack_id);
 
 		$data['is_logged_in'] = $this->user_model->is_logged_in();
@@ -107,18 +104,6 @@ class Rack extends CI_Controller {
 
 		redirect($_SERVER['HTTP_REFERER']);
 	}
-
-	/*
-	public function unfavourite_rack() {
-		$rack_id = urldecode($this->uri->segment(2, -1));
-		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id))
-			redirect(base_url('rack/notfound'));
-
-		$this->rack_model->unfavourite_rack($rack_id);
-
-		redirect($_SERVER['HTTP_REFERER']);
-	}
-	*/
 
 	public function thumbs_up() {
 		//Check if user is logged in

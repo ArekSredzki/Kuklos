@@ -23,9 +23,9 @@
                                     <?php if ($is_logged_in) : ?>
                                     <a class="btn btn-warning" href="<?php echo base_url("rack/".$rack_data['rack_id']."/favourite_rack"); ?>">
                                         <?php if ($this->rack_model->is_favourited($rack_data['rack_id'], $this->session->userdata('email'))) : ?>
-                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star fa-fw"></i>
                                         <?php else : ?>
-                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o fa-fw"></i>
                                         <?php endif; ?>
                                     </a>
                                     <a class="btn btn-success" href="<?php echo base_url("rack/".$rack_data['rack_id']."/thumbs_up"); ?>">
