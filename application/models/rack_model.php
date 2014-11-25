@@ -238,6 +238,14 @@ class Rack_Model extends CI_Model {
 		$this->db->where($where)->from('ratings');
 		return $this->db->count_all_results() == 1;
 	}
+  
+  function canShare($rack_id, $email) {
+    if ($this->rating_exists($rack_id, $email) || 
+    $this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
+      return true;
+    }
+    return false;
+  }
 
 		//*****************************//
 	   //                             //
