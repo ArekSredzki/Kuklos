@@ -43,7 +43,7 @@
                     <div class="member col-md-4 col-sm-6 col-xs-12">
                         <div class="member-inner">
                             <figure class="profile">
-                                <img class="img-responsive" src="http://placehold.it/230x230" alt=""/>
+                                <img class="img-responsive" src="assets/images/team/member-2.png" alt=""/>
                                 <figcaption class="info"><span class="name">Jon Mercer</span><br /><span class="job-title">Co-Founder</span></figcaption>
                             </figure><!--//profile-->
                             <div class="social">
