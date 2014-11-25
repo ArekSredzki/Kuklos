@@ -28,7 +28,7 @@ echo "Updating to HEAD";
 if( file_exists($LOCAL_REPO) ) {
 
 	// If there is already a repo, just run a git pull to grab the latest changes
-	$output = shell_exec("cd {$LOCAL_REPO} && git add . && git reset --hard && git pull 2>&1");
+	$output = shell_exec("cd {$LOCAL_REPO} && git fetch origin && git reset --hard origin/master 2>&1");
 
 } else {
 
