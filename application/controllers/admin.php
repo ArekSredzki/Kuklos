@@ -48,7 +48,7 @@ class Admin extends CI_Controller {
 		// write the file to your server
 		write_file('/var/backups/kuklos/backup_'.$number_of_backups.'.sql', $backup);
 
-		// Load the download helper and send the file to your desktop
+		// // Load the download helper and send the file to your desktop
 		// $this->load->helper('download');
 		// force_download('mybackup.gz', $backup);
 

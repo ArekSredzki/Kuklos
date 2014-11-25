@@ -81,6 +81,85 @@ class User extends CI_Controller {
 		}
 	}
 
+	public function signup_with_provider() {
+		if ($this->user_model->is_logged_in())
+			redirect('account/login');
+
+		// Get provider_name
+		$provider_name = urldecode($this->uri->segment(3,-1));
+
+		switch ($provider_name) {
+			case 'facebook':
+				include(APPPATH . 'libraries/League/OAuth2/Provider/Facebook.php');
+		
+				$provider = new League\OAuth2\Client\Provider\Facebook(array(
+					'clientId'  =>  'ac4ccc04a4766ea469a7464342fee075',
+					'clientSecret'  =>  '913fab2aabe36d3af31dc738e3964d69',
+					'redirectUri'   =>  'http://kuklos.vikom.io/user/signup/facebook',
+					'scopes' => array('email'),
+				));
+				break;
+
+			case 'github':
+				include(APPPATH . 'libraries/League/OAuth2/Provider/Github.php');
+		
+				$provider = new League\OAuth2\Client\Provider\Github(array(
+					'clientId'  =>  '246372104087-gf5re27h5ds69p09ubs25qmlf4bh3oim.apps.googleusercontent.com',
+					'clientSecret'  =>  'NZwabW817I6jhN1n8TdB',
+					'redirectUri'   =>  'http://kuklos.vikom.io/user/signup/github',
+					'scopes' => array('email'),
+				));
+				break;
+
+			case 'google':
+				include(APPPATH . 'libraries/League/OAuth2/Provider/Google.php');
+		
+				$provider = new League\OAuth2\Client\Provider\Google(array(
+					'clientId'  =>  '246372104087-gf5re27h5ds69p09ubs25qmlf4bh3oim.apps.googleusercontent.com',
+					'clientSecret'  =>  'NZwabW817I6jhN1n8TdB',
+					'redirectUri'   =>  'http://kuklos.vikom.io/user/signup/google',
+					'scopes' => array('email'),
+				));
+				break;
+			
+			default:
+				return;
+				break;
+		}
+
+		if (!isset($_GET['code'])) {
+			// If we don't have an authorization code then get one
+			header('Location: '.$provider->getAuthorizationUrl());
+			exit;
+		} else {
+			// Try to get an access token (using the authorization code grant)
+			$token = $provider->getAccessToken('authorization_code', [
+				'code' => $_GET['code']
+			]);
+
+			// Optional: Now you have a token you can look up a users profile data
+			try {
+				// We got an access token, let's now get the user's details
+				$userDetails = $provider->getUserDetails($token);
+
+				// Use these details to create a new profile
+				printf('Hello %s!', $userDetails->email);
+			} catch (Exception $e) {
+				// Failed to get user details
+				exit('Oh dear...');
+			}
+
+			// Use this to interact with an API on the users behalf
+			echo $token->accessToken;
+
+			// Use this to get a new access token if the old one expires
+			echo $token->refreshToken;
+
+			// Number of seconds until the access token will expire, and need refreshing
+			echo $token->expires;
+		}
+	}
+
 	public function login() {
 		$this->load->library('form_validation');
 

@@ -26,10 +26,9 @@
                                 <div class="social-btns col-md-5 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">  
                                     <div class="divider"><span>Or</span></div>                      
                                     <ul class="list-unstyled social-login">
-                                        <li><button class="twitter-btn btn" type="button"><i class="fa fa-twitter"></i>Sign up with Twitter</button></li>
-                                        <li><button class="facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Sign up with Facebook</button></li>
-                                        <li><button class="github-btn btn" type="button"><i class="fa fa-github-alt"></i>Sign up with Github</button></li>
-                                        <li><button class="google-btn btn" type="button"><i class="fa fa-google-plus"></i>Sign up with Google</button></li>
+                                        <li><a class="facebook-btn btn" href="<?php echo base_url('user/signup/facebook'); ?>"><i class="fa fa-facebook"></i>Sign up with Facebook</a></li>
+                                        <li><a class="github-btn btn" href="<?php echo base_url('user/signup/github'); ?>"><i class="fa fa-github-alt"></i>Sign up with Github</a></li>
+                                        <li><a class="google-btn btn" href="<?php echo base_url('user/signup/google'); ?>"><i class="fa fa-google-plus"></i>Sign up with Google</a></li>
                                     </ul>
                                     <p class="note">Don't worry, we won't post anything without your permission.</p>
                                 </div><!--//social-login -->
