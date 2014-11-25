@@ -37,6 +37,12 @@
                                     <span class="btn btn-default disabled">
                                         <?php echo $rating; ?>
                                     </span>
+                                    <?php if ($this->rack_model->canShare($rack_data['rack_id'], $this->session->userdata('email'))) {
+                                      echo '<span style="margin-left:10px">';
+                                        $rack_url = base_url()."rack/".$rack_data['rack_id'];
+                                        echo '<div class="fb-share-button" data-href="'.$rack_url.'" data-layout="button_count"></div>
+                                      </span>';
+                                    } ?>
                                     <?php else : ?>
                                     <a class="btn btn-default disabled" href="<?php echo base_url('user/signup'); ?>">
                                         Login to rate, favourite, and leave comments
