@@ -55,11 +55,10 @@ class Admin extends CI_Controller {
 		redirect(base_url('admin'));
 	}
 
-	public function restore_backup() {
+	public function restore_backup($file_name) {
 		// Load the file helper 
 		$this->load->helper('file');
 
-		$file_name = urldecode($this->uri->segment(3,-1));
 		$file_path = '/var/backups/kuklos/'.$file_name;
 
 		$backup = read_file($file_path);
@@ -178,5 +177,5 @@ class Admin extends CI_Controller {
 	}
 }
 
-/* End of file home.php */
-/* Location: ./application/controllers/home.php */
+/* End of file admin.php */
+/* Location: ./application/controllers/admin.php */

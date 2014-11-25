@@ -45,7 +45,7 @@ $route['rack/(:num)/thumbs_down'] = "rack/thumbs_down/$1";
 $route['rack/(:num)/favourite_rack'] = "rack/favourite_rack/$1";
 $route['rack/(:num)'] = "rack/display/$1";
 $route['admin/restore_backup/(:num)'] = "admin/restore_backup/$1";
-$route['user/signup/(:any)'] = "user/signup_with_provider/$1";
+$route['user/connect/(:any)'] = "user/connect_with_oauth2/$1";
 
 $route['404_override'] = 'error';
 

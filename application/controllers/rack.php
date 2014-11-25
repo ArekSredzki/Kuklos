@@ -8,11 +8,10 @@ class Rack extends CI_Controller {
 		$this->template->set_partial('header', 'layouts/header')->set_partial('footer', 'layouts/footer')->set_layout('application');
 	}
 
-	public function display() {
+	public function display($rack_id) {
 		$this->load->helper('inflector');
 
-		// Get rack_id
-		$rack_id = urldecode($this->uri->segment(2,-1));
+		// Verify rack_id
 		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
 			redirect(base_url('rack/notfound'));
 
@@ -86,14 +85,13 @@ class Rack extends CI_Controller {
 			->build('pages/rack/notfound', $data);
 	}
 
-	public function favourite_rack() {
+	public function favourite_rack($rack_id) {
 		//Check if user is logged in
 		if (!$this->user_model->is_logged_in())
 			redirect($_SERVER['HTTP_REFERER']);
 
-		// Get rack_id
-		$rack_id = urldecode($this->uri->segment(2, -1));
-		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id))
+		// Verify rack_id
+		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
 			redirect(base_url('rack/notfound'));
 
 		if ($this->rack_model->is_favourited($rack_id, $this->session->userdata('email'))) {
@@ -105,13 +103,12 @@ class Rack extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
-	public function thumbs_up() {
+	public function thumbs_up($rack_id) {
 		//Check if user is logged in
 		if (!$this->user_model->is_logged_in())
 			redirect($_SERVER['HTTP_REFERER']);
 
-		// Get rack_id
-		$rack_id = urldecode($this->uri->segment(2,-1));
+		// Verify rack_id
 		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
 			redirect(base_url('rack/notfound'));
 
@@ -120,13 +117,12 @@ class Rack extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
-	public function thumbs_down() {
+	public function thumbs_down($rack_id) {
 		//Check if user is logged in
 		if (!$this->user_model->is_logged_in())
 			redirect($_SERVER['HTTP_REFERER']);
 
-		// Get rack_id
-		$rack_id = urldecode($this->uri->segment(2,-1));
+		// Verify rack_id
 		if ($rack_id == -1 || !$this->rack_model->rack_check($rack_id)) 
 			redirect(base_url('rack/notfound'));
 

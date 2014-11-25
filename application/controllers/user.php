@@ -25,11 +25,9 @@ class User extends CI_Controller {
 		redirect(base_url());
 	}
 
-	//		$this->form_validation->set_rules('username', 'Username', 'required|trim|min_length[4]|max_length[32]|is_unique[users.username]|xss_clean|strip_tags');
-
 	public function signup() {
 		if ($this->user_model->is_logged_in())
-			redirect('account/login');
+			redirect('user/login');
 
 		$this->load->library('form_validation','encrypt');
 
@@ -46,33 +44,9 @@ class User extends CI_Controller {
 				->build('pages/user/signup', $data);
 		} else {
 
-			// Setup validation email
-			$this->load->library('email', array('mailtype'=>'html'));
-
-			$this->email->from('hello@vikom.io', 'Kuklos');
-			$this->email->to($this->input->post('email'));
-			$this->email->subject("Welcome to Kuklos!");
-
-			$message = "<p>Hello!</p>";
-			$message .= "<p>Thanks for signing up for a Kuklos account!</p>";
-			$message .= "<p>Your username is: ".$this->input->post('email')."</p>";
-			$message .= "<p>You can login here: ".base_url('user/login')."</p>";
-			$message .= "<p>We hope you enjoy the service.</p>";
-			$message .= "<p>Thanks,<br/> - The Kuklos Team</p>";
-			$message .= "<br/><p>This mailbox is not monitored</p>";
-
-			$this->email->message($message);
-
 			if ($this->user_model->add_user()) {
-				if ($this->email->send()) {
-
-					$data = array(
-						'email' => $this->input->post('email'),
-						'is_logged_in' => 1,
-						'default_view' => 'map'
-					);
-					$this->session->set_userdata($data);
-
+				if ($this->send_welcome_email($this->input->post('email'))) {
+					$this->set_login_userdata($this->input->post('email'));
 					redirect('user');
 				} else {
 					echo "Error sending email";
@@ -81,50 +55,40 @@ class User extends CI_Controller {
 		}
 	}
 
-	public function signup_with_provider() {
+	public function connect_with_oauth2($provider_name) {
 		if ($this->user_model->is_logged_in())
-			redirect('account/login');
-
-		// Get provider_name
-		$provider_name = urldecode($this->uri->segment(3,-1));
+			redirect('user/login');
 
 		switch ($provider_name) {
 			case 'facebook':
-				include(APPPATH . 'libraries/League/OAuth2/Provider/Facebook.php');
-		
 				$provider = new League\OAuth2\Client\Provider\Facebook(array(
-					'clientId'  =>  'ac4ccc04a4766ea469a7464342fee075',
+					'clientId'  =>  '738761806197904',
 					'clientSecret'  =>  '913fab2aabe36d3af31dc738e3964d69',
-					'redirectUri'   =>  'http://kuklos.vikom.io/user/signup/facebook',
+					'redirectUri'   =>  'http://kuklos.vikom.io/user/connect/facebook',
 					'scopes' => array('email'),
 				));
 				break;
 
 			case 'github':
-				include(APPPATH . 'libraries/League/OAuth2/Provider/Github.php');
-		
 				$provider = new League\OAuth2\Client\Provider\Github(array(
-					'clientId'  =>  '246372104087-gf5re27h5ds69p09ubs25qmlf4bh3oim.apps.googleusercontent.com',
-					'clientSecret'  =>  'NZwabW817I6jhN1n8TdB',
-					'redirectUri'   =>  'http://kuklos.vikom.io/user/signup/github',
+					'clientId'  =>  'e100df6b5305c00f58e3',
+					'clientSecret'  =>  'b27953bc5421ce1e109e2b49c7fbb170de51108c',
+					'redirectUri'   =>  'http://kuklos.vikom.io/user/connect/github',
 					'scopes' => array('email'),
 				));
 				break;
 
 			case 'google':
-				include(APPPATH . 'libraries/League/OAuth2/Provider/Google.php');
-		
 				$provider = new League\OAuth2\Client\Provider\Google(array(
 					'clientId'  =>  '246372104087-gf5re27h5ds69p09ubs25qmlf4bh3oim.apps.googleusercontent.com',
-					'clientSecret'  =>  'NZwabW817I6jhN1n8TdB',
-					'redirectUri'   =>  'http://kuklos.vikom.io/user/signup/google',
+					'clientSecret'  =>  '4ccpNZwabW817I6jhN1n8TdB',
+					'redirectUri'   =>  'http://kuklos.vikom.io/user/connect/google',
 					'scopes' => array('email'),
 				));
 				break;
 			
 			default:
-				return;
-				break;
+				exit('Unsupported OAuth2 Provider: '.$provider_name);
 		}
 
 		if (!isset($_GET['code'])) {
@@ -133,30 +97,38 @@ class User extends CI_Controller {
 			exit;
 		} else {
 			// Try to get an access token (using the authorization code grant)
-			$token = $provider->getAccessToken('authorization_code', [
+			$token = $provider->getAccessToken('Authorization_Code', [
 				'code' => $_GET['code']
 			]);
 
-			// Optional: Now you have a token you can look up a users profile data
+			// Get user email
+			$email = '';
 			try {
 				// We got an access token, let's now get the user's details
 				$userDetails = $provider->getUserDetails($token);
 
 				// Use these details to create a new profile
-				printf('Hello %s!', $userDetails->email);
+				$email = $userDetails->email;
 			} catch (Exception $e) {
 				// Failed to get user details
-				exit('Oh dear...');
+				exit('Something went wrong. Contact Admin.');
 			}
 
-			// Use this to interact with an API on the users behalf
-			echo $token->accessToken;
+			// Create account if it does not exist
+			if ($this->user_model->add_oauth_user($email)) {
+				$this->send_welcome_email($email);
+			}
+			$this->set_login_userdata($email);
+			redirect('user');
 
-			// Use this to get a new access token if the old one expires
-			echo $token->refreshToken;
+			// // Use this to interact with an API on the users behalf
+			// echo $token->accessToken;
 
-			// Number of seconds until the access token will expire, and need refreshing
-			echo $token->expires;
+			// // Use this to get a new access token if the old one expires
+			// echo $token->refreshToken;
+
+			// // Number of seconds until the access token will expire, and need refreshing
+			// echo $token->expires;
 		}
 	}
 
@@ -177,14 +149,7 @@ class User extends CI_Controller {
 				->set_layout('minimal')
 				->build('pages/user/login', $data);
 		} else {
-
-			$data = array(
-				'email' => $this->input->post('email'),
-				'is_logged_in' => 1,
-				'default_view' => 'map'
-			);
-			$this->session->set_userdata($data);
-
+			$this->set_login_userdata($this->input->post('email'));
 			redirect('user');
 		}
 	}
@@ -203,7 +168,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger fade in">', '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|valid_email|callback_valid_account_email');
 
-		if($this->form_validation->run() === FALSE) {
+		if ($this->form_validation->run() === FALSE) {
 			$data['page_name'] = "forgot-page";
 			$this->template
 				->title('Password Reset', 'Kuklos')
@@ -211,7 +176,7 @@ class User extends CI_Controller {
 				->build('pages/user/forgot', $data);
 		} else {
 			$this->load->helper('gen');
-			$userdata = $this->user_model->get_userdata($this->user_model->get_email($this->input->post('email')));
+			$userdata = $this->user_model->get_userdata($this->input->post('email'));
 
 			// Generate new password
 			$newpassword = _keyword(12);
@@ -233,16 +198,16 @@ class User extends CI_Controller {
 
 			$this->email->message($message);
 
-			if ($this->user_model->reset_password($user_id , $newpassword)) {
+			if ($this->user_model->reset_password($userdata['email'], $newpassword)) {
 				if ($this->email->send()) {
 					//Send the success to our javascript file.
 					$data['result'] = '<div class="alert alert-success fade in"><strong>Your password has been reset!</strong><br>Check your email for your password!<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
 				} else {
 					$data['result'] =  '<div class="alert alert-warning fade in"><strong>Your password has been reset!</strong><button type="button" class="close" data-dismiss="alert">&times;</button><br>However we were unable to send the email, please contact support.<p>';
-
 				}
-			} else
+			} else {
 				$data['result'] =  '<div class="alert alert-danger fade in"><strong>Error</strong><button type="button" class="close" data-dismiss="alert">&times;</button><br>Unable to reset password.</div>';
+			}
 
 			$data['page_name'] = "forgot-page";
 			$this->template
@@ -259,6 +224,36 @@ class User extends CI_Controller {
 			$this->form_validation->set_message('validate_credentials', 'Incorrect email/password.');
 			return false;
 		}
+	}
+
+	private function send_welcome_email($email_address) {
+		// Setup validation email
+		$this->load->library('email', array('mailtype'=>'html'));
+
+		$this->email->from('hello@vikom.io', 'Kuklos');
+		$this->email->to($email_address);
+		$this->email->subject("Welcome to Kuklos!");
+
+		$message = "<p>Hello!</p>";
+		$message .= "<p>Thanks for signing up for a Kuklos account!</p>";
+		$message .= "<p>Your username is: ".$email_address."</p>";
+		$message .= "<p>You can login here: ".base_url('user/login')."</p>";
+		$message .= "<p>We hope you enjoy the service.</p>";
+		$message .= "<p>Thanks,<br/> - The Kuklos Team</p>";
+		$message .= "<br/><p>This mailbox is not monitored</p>";
+
+		$this->email->message($message);
+
+		return $this->email->send();
+	}
+
+	private function set_login_userdata($email)	{
+		$data = array(
+			'email' => $email,
+			'is_logged_in' => 1,
+			'default_view' => 'map'
+		);
+		$this->session->set_userdata($data);
 	}
 }
 

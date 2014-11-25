@@ -25,9 +25,9 @@
                                 <div class="social-btns col-md-5 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">  
                                     <div class="divider"><span>Or</span></div>                      
                                     <ul class="list-unstyled social-login">
-                                        <li><button class="facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Log in with Facebook</button></li>
-                                        <li><button class="github-btn btn" type="button"><i class="fa fa-github-alt"></i>Log in with Github</button></li>
-                                        <li><button class="google-btn btn" type="button"><i class="fa fa-google-plus"></i>Log in with Google</button></li>
+                                        <li><a class="facebook-btn btn" href="<?php echo base_url('user/connect/facebook'); ?>"><i class="fa fa-facebook"></i>Login with Facebook</a></li>
+                                        <li><a class="github-btn btn" href="<?php echo base_url('user/connect/github'); ?>"><i class="fa fa-github-alt"></i>Login with Github</a></li>
+                                        <li><a class="google-btn btn" href="<?php echo base_url('user/connect/google'); ?>"><i class="fa fa-google-plus"></i>Login with Google</a></li>
                                     </ul>
                                 </div><!--//social-btns-->
                             </div><!--//row-->

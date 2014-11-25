@@ -35,6 +35,26 @@ class User_Model extends CI_Model {
 			return false;
 	}
 
+	function add_oauth_user($email) {
+		$this->load->helper('date');
+
+		// Populate user table
+		$data = array(
+			'email' => $email,
+			'timestamp' => now()
+		);
+		
+		$query = $this->db->insert('users', $data);
+		//$email = $this->input->post('email');
+
+
+		// Report findings
+		if ($query)
+			return true;
+		else
+			return false;
+	}
+
 		//*****************************//
 	   //                             //
 	  //      EDITING FUNCTIONS      //
